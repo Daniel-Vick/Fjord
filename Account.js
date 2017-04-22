@@ -1,5 +1,5 @@
 import React, { Component, } from 'react'
-import { View, TextInput, Text, Button, ListView, TouchableHighlight, Alert } from 'react-native'
+import { View, TextInput, Text, Button, ListView, TouchableHighlight, Alert, AsyncStorage } from 'react-native'
 import AccountPlaylist from './AccountPlaylist'
 import MenuBar from './MenuBar.js'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,10 +13,10 @@ class Account extends Component {
   _navigate() {
     this.props.navigator.pop();
   }
-  getPlaylists() {
+  getPlaylists(auth_key) {
     var that = this;
     var new_url = "https://api.spotify.com/v1/users/" + this.props.username + "/playlists";
-    return fetch('https://api.spotify.com/v1/users/moonpie51/playlists', {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + "BQC7ezRJ0vGKEYQM9NCrjI76JPWLfWiYKH7GBXDwh4loMFusHpvUDo92ceschG58g953DJUQhs_4MkZB_HAgZIUWFhmDjJy0PuVAAR81wyqX7Bifq2mJdSGGUZ9Jcozq9K4pEqpCMEyU160vptw1KjpZmHZLS8RVSnlA3InzkagJxoiI0HKylrVq0GSUxe9LEOpndJQxT44IEKyZfDxK5aY-mEcbLMdh2M7D2bzyRaIH_NJTcT3AyWn1cw"}})
+    return fetch('https://api.spotify.com/v1/users/moonpie51/playlists', {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + auth_key}})
       .then((response) => response.json()).then((responseJson) => {
         var items = responseJson.items;
         var playlistIds = [];
@@ -30,7 +30,10 @@ class Account extends Component {
       });
   }
   componentDidMount() {
-    this.getPlaylists();
+    AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
+                                          console.log("##########TEST DB#############");
+                                          console.log(this.getPlaylists(JSON.parse(authStr).auth_key));
+                                          });
   }
   render() {
     return (

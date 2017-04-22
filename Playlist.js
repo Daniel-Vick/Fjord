@@ -1,5 +1,5 @@
 import React, { Component, } from 'react'
-import { View, Button, ListView, Text, TouchableHighlight } from 'react-native'
+import { View, Button, ListView, Text, TouchableHighlight, AsyncStorage } from 'react-native'
 import Song from './Song.js'
 import MenuBar from './MenuBar.js'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,12 +14,15 @@ class Playlist extends Component {
     this.props.navigator.pop();
   }
   componentDidMount() {
-    this.getSongs();
+    AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
+                                          console.log("##########TEST DB#############");
+                                          console.log(this.getSongs(JSON.parse(authStr).auth_key));
+                                          });
   }
-  getSongs() {
+  getSongs(auth_key) {
     var that = this;
     var new_url = "https://api.spotify.com/v1/users/"+this.props.username+"/playlists/" + this.props.id;
-    return fetch(new_url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + this.props.auth}})
+    return fetch(new_url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + auth_key}})
       .then((response) => response.json()).then((responseJson) => {
         var items = responseJson.tracks.items;
         var songNames = [];

@@ -21,9 +21,14 @@ class PlaylistView extends Component {
         scoreChange++;
         this.setState({downVoted:false, downVoteColor:'white'});
       }
+      this.setState({score: this.state.score + scoreChange});
       this.props.db.database().ref(input5).set(
         {username:input1, id:input2, name:input3, score:(input4+scoreChange)});
       this.setState({upVoted:true, upVoteColor:'#7DC1B6'});
+    } else {
+      this.setState({score: this.state.score - 1, upVoteColor:'white', upVoted: false});
+      this.props.db.database().ref(input5).set(
+                                               {username:input1, id:input2, name:input3, score:(input4)});
     }
     
   }
@@ -34,9 +39,14 @@ class PlaylistView extends Component {
         scoreChange++;
         this.setState({upVoted:false, upVoteColor:'white'});
       }
+      this.setState({score: this.state.score - scoreChange});
       this.props.db.database().ref(input5).set(
                                                {username:input1, id:input2, name:input3, score:(input4-scoreChange)});
       this.setState({downVoted:true, downVoteColor:'#7DC1B6'});
+    } else {
+      this.setState({score: this.state.score + 1, downVoteColor:'white', downVoted: false});
+      this.props.db.database().ref(input5).set(
+                                               {username:input1, id:input2, name:input3, score:(input4)});
     }
     
   }

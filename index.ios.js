@@ -32,15 +32,19 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const BGColor = "#313C4F";
 
-var auth = "BQC7ezRJ0vGKEYQM9NCrjI76JPWLfWiYKH7GBXDwh4loMFusHpvUDo92ceschG58g953DJUQhs_4MkZB_HAgZIUWFhmDjJy0PuVAAR81wyqX7Bifq2mJdSGGUZ9Jcozq9K4pEqpCMEyU160vptw1KjpZmHZLS8RVSnlA3InzkagJxoiI0HKylrVq0GSUxe9LEOpndJQxT44IEKyZfDxK5aY-mEcbLMdh2M7D2bzyRaIH_NJTcT3AyWn1cw";
+var auth = "BQBrwwulEww6b13nXXWxGX4TTgdgR7AFy_pSyApJyIex3ShNTZmfvWAEPH_D2OVU8pk-2Qarkc0dv8bZaJvyGCbxkp518d4GAunrTTaCe--zVfsZ-F_LEh5b8eRD1nLeElXBbkM8CRX-f_pkbDLpx9zKK_N9Ep1nRsUF1ssE-g";
 
 export default class Fjord extends Component {
   constructor(props) {
     super(props);
-    this.state = {username: '', playlist: ''}
+    this.state = {username: '', playlist: '', auth:''}
   }
   
-  
+  setAuth(input) {
+    this.setState({auth: input});
+    console.log("########################");
+    console.log(this.state.auth);
+  }
   
   renderScene(route, navigator) {
    if(route.name == 'Playlist') {

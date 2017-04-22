@@ -18,13 +18,12 @@ class Login extends Component {
       }
       
       var auth = navState.url.substring(42, i);
-      try {
-        await AsyncStorage.setItem('@Auth', auth);
-      } catch (error) {
-        Alert("Welp");
-      }
       console.log(auth);
-      this.props.navigator.push({name: 'Leaderboard', auth: auth});
+      const AUTH_KEY = 'AUTH_KEY'
+      const authObj = {auth_key: auth}
+      AsyncStorage.setItem(AUTH_KEY, JSON.stringify(authObj));
+
+      this.props.navigator.replace({name: 'Leaderboard', auth: auth});
     }
     
   }
