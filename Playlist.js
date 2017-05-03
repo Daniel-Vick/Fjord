@@ -13,6 +13,21 @@ class Playlist extends Component {
   _navigate() {
     this.props.navigator.pop();
   }
+  addPlaylist() {
+    AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
+                                          this.playlistAddAPICall(JSON.parse(authStr).auth_key);
+                                          });
+  }
+  playlistAddAPICall(auth_key) {
+    var that = this;
+    var data = {"public":false}
+    var JSONData = JSON.stringify(data);
+    var new_url = "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX0XUsuxWHRQd/followers";
+    fetch(new_url, {method: 'PUT', headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + auth_key, 'Content-Type': 'application/json'}, body: JSON.stringify({"public":false})})
+    .then((response) => {
+           console.log(JSON.stringify(response));
+           });
+  }
   componentDidMount() {
     AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
                                           console.log("##########TEST DB#############");
@@ -40,12 +55,15 @@ class Playlist extends Component {
     return(
       <View style={{flex: 1, backgroundColor: this.props.BG}}>
         <View style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop: 5}}>
-           <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginLeft:5}}>
-              <Icon name={"chevron-left"} color={"white"} size={20} />
-           </TouchableHighlight>
+          <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginLeft:5}}>
+            <Icon name={"chevron-left"} color={"white"} size={20} />
+          </TouchableHighlight>
           <View style={{backgroundColor:this.props.BG, flex:8, alignItems:'center', marginTop:10, marginRight:20}}>
-            <Text style={{color:"white", fontWeight:'bold', fontSize:15, marginTop:5}}>{this.props.title}</Text>
+            <Text style={{color:"white", fontWeight:'bold', fontSize:20, marginTop:5}}>{this.props.title}</Text>
           </View>
+          <TouchableHighlight onPress={() => this.addPlaylist()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginRight:5}}>
+            <Icon name={"check"} color={"white"} size={20} />
+          </TouchableHighlight>
         </View>
         <View style={{flex: 8, backgroundColor: this.props.BG}}>
           <ListView dataSource={this.state.songs} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]}/>}/>
