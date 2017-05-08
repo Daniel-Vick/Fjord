@@ -16,59 +16,60 @@ class PlaylistView extends Component {
   }
   _upVote(input1, input2, input3, input4, input5) {
     var scoreChange = 1;
-    if (!this.state.upVoted) {
-      if (this.state.downVoted) {
+    if (!(this.props.vote === 1)) {
+      if (this.props.vote == -1) {
         scoreChange++;
-        this.setState({downVoted:false, downVoteColor:'white'});
       }
-      var currScore = this.state.score
-      this.setState({score: this.state.score + scoreChange, upVoted:true, upVoteColor:'#7DC1B6'});
-      this.props.db.database().ref(input5).update({score: currScore + scoreChange});
+      this.props.updateLead(this.props._key, this.props.score + scoreChange, 1);
+      this.props.db.database().ref(input5).update({score: this.props.score + scoreChange});
     } else {
-      var currScore = this.state.score
-      this.setState({score: this.state.score - 1, upVoteColor:'white', upVoted: false});
-      this.props.db.database().ref(input5).update({score: currScore - 1});
+      this.props.updateLead(this.props._key, this.props.score - 1, 0);
+      this.props.db.database().ref(input5).update({score: this.props.score - 1});
     }
     
   }
   _downVote(input1, input2, input3, input4, input5) {
     var scoreChange = 1;
-    if (!this.state.downVoted) {
-      if (this.state.upVoted) {
+    console.log(this.props.vote);
+    if (!(this.props.vote === -1)) {
+      if (this.props.vote === 1) {
         scoreChange++;
-        this.setState({upVoted:false, upVoteColor:'white'});
       }
-      var currScore = this.state.score
-      this.setState({score: this.state.score - scoreChange, downVoted:true, downVoteColor:'#7DC1B6'});
-      this.props.db.database().ref(input5).update({score: currScore - scoreChange});
+      this.props.updateLead(this.props._key, this.props.score - scoreChange, -1);
+      this.props.db.database().ref(input5).update({score: this.props.score - scoreChange});
     } else {
-      var currScore = this.state.score
-      this.setState({score: this.state.score + 1, downVoteColor:'white', downVoted: false});
-      this.props.db.database().ref(input5).update({score: currScore + 1});
+      console.log("FUUCKKKK");
+      this.props.updateLead(this.props._key, this.props.score + 1, 0);
+      this.props.db.database().ref(input5).update({score: this.props.score + 1});
     }
     
   }
   render() {
     return(
-           <View style={{flex: 1, flexDirection: 'row', marginLeft:10, marginRight:10}} >
+         <View style={{flex: 1, flexDirection: 'row', marginLeft:10, marginRight:10}} >
+
            <TouchableHighlight onPress={() => this._navigate(this.props.user, this.props.id, this.props.name)} style={{flex: 9, borderBottomWidth:0.5, borderColor:"white"}}>
             <View style={{flex:1}}>
               <Text style={{flex:2, color:"white", fontWeight:'bold', fontSize:15, marginTop:5}}>{this.props.name}</Text>
               <Text style={{flex:1, color:"#EEEEEE", fontSize:12, marginBottom:5}}>{this.props.user}</Text>
             </View>
            </TouchableHighlight>
+
            <View style={{flex:1, paddingTop: 5, borderBottomWidth:0.5, borderColor:"white"}}>
            <TouchableHighlight onPress={() => this._upVote(this.props.user, this.props.id, this.props.name, this.props.score, this.props._key)} style={{justifyContent:'center', marginRight:10}}>
-            <Icon name="chevron-up" size={15} color={this.state.upVoteColor} />
+            <Icon name="chevron-up" size={15} color={'white'} />
             </TouchableHighlight>
+
             <TouchableHighlight onPress={() => this._downVote(this.props.user, this.props.id, this.props.name, this.props.score, this.props._key)} style={{justifyContent:'center', marginRight:10}}>
-            <Icon name="chevron-down" size={15} color={this.state.downVoteColor} />
+            <Icon name="chevron-down" size={15} color={'white'} />
             </TouchableHighlight>
+
            </View>
            <View style={{flex:1, borderBottomWidth:0.5, borderColor:"white", flexDirection:'row', alignItems:'center'}}>
-            <Text style={{color:"white", fontSize:15, fontWeight:'bold'}}>{this.props.score + this.state.score}</Text>
+            <Text style={{color:"white", fontSize:15, fontWeight:'bold'}}>{this.props.score}</Text>
            </View>
-           </View>
+           
+         </View>
     );
   }
 }

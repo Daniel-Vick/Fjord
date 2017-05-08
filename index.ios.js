@@ -37,7 +37,7 @@ var auth = "BQBrwwulEww6b13nXXWxGX4TTgdgR7AFy_pSyApJyIex3ShNTZmfvWAEPH_D2OVU8pk-
 export default class Fjord extends Component {
   constructor(props) {
     super(props);
-    this.state = {username: '', playlist: '', auth:''}
+    this.state = {username: '', playlist: '', auth:'', loggedIn: false}
   }
   
   setAuth(input) {
@@ -63,14 +63,40 @@ export default class Fjord extends Component {
       return <Login navigator={navigator}/>
     }
   }
-  
+  onNavigationStateChange = async (navState) => {
+    if (navState.url.substring(0,42) === 'http://192.241.219.250:8888/#access_token=') {
+      var i = 43;
+      
+      while (i < navState.url.length && navState.url.substring(i,i+1) != '&') {
+        i++;
+      }
+      
+      var auth = navState.url.substring(42, i);
+      console.log(auth);
+      const AUTH_KEY = 'AUTH_KEY'
+      const authObj = {auth_key: auth}
+      AsyncStorage.setItem(AUTH_KEY, JSON.stringify(authObj));
+      this.setState({loggedIn: true});
+    }
+    
+  }
   render() {
+    if (this.state.loggedIn) {
     return (
       <Navigator
         navigationBar={<MenuBar />}
-        initialRoute={{ name: 'Login'}}
+        initialRoute={{ name: 'Leaderboard'}}
         renderScene={ this.renderScene.bind(this) } />
     );
+    } else {
+      return(
+             <WebView
+             source={{uri: 'http://192.241.219.250:8888/'}}
+             onNavigationStateChange={this.onNavigationStateChange}
+             style={{marginTop: 20}}
+             />
+             );
+    }
   }
 }
 
