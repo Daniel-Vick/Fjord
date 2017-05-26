@@ -22,6 +22,8 @@ class Account extends Component {
         var playlistIds = [];
         for (i = 0; i < items.length; i++) {
           playlistIds.push([items[i].id, items[i].name, items[i].owner.id]);
+                                                console.log("##############id###########");
+                                                console.log(items[i].id);
         }
         that.setState({playlists:that.state.dataSource.cloneWithRows(playlistIds)});
       })
@@ -38,13 +40,16 @@ class Account extends Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: this.props.BG}}>
-            <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 0.5, backgroundColor: this.props.BG, marginTop:20, marginLeft:5}}>
+        <View style={{flexDirection: 'row', marginTop:20, marginLeft:5, marginRight:5}}>
+            <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 0.5, backgroundColor: this.props.BG}}>
             <Icon
             name={"chevron-left"}
             color={"white"}
             size={20}
             />
             </TouchableHighlight>
+            <Text style={{color:'white'}}>Your Playlists</Text>
+        </View>
         <View style={{flex: 7.5, backgroundColor: this.props.BG}}>
             <ListView dataSource={this.state.playlists} renderRow={(rowData) => <AccountPlaylist firebaseApp={this.props.firebaseApp} id={rowData[0]} name={rowData[1]} user={rowData[2]} score={0}/>}/>
         </View>

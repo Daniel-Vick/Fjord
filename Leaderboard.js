@@ -13,18 +13,27 @@ import PlaylistView from './PlaylistView'
 import MenuBar from './MenuBar.js'
 import * as firebase from 'firebase';
 
+var ip = 'http://192.168.1.90';
+
 var styles = StyleSheet.create({
     tabInactive: {
-       flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
+       //flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
+        flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
+                               
     },
     tabActive: {
        flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
     },
-    tabFont: {
+    tabFontActive: {
       color: 'white', fontWeight: 'bold', fontSize: 15
+    },
+    tabFontInactive: {
+      color: "white", fontWeight: 'bold', fontSize: 15
     }
 
 });
+
+const textColor = "#7DC1B6";
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -45,18 +54,50 @@ class Leaderboard extends Component {
     dbArrayNew: null,
     lead: "Top",
     activeTab: 0,
-    tabStyles: [styles.tabActive, styles.tabInactive, styles.tabInactive]
+    tabStyles: [styles.tabActive, styles.tabFontActive,  styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive]
   };
   }
   switchDataSource(source) {
     if (source == "Top") {
-      this.setState({activeTab: 0, tabStyles: [styles.tabActive, styles.tabInactive, styles.tabInactive],lead: "Top"});
+      this.setState({activeTab: 0, tabStyles: [styles.tabActive, styles.tabFontActive, styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive],lead: "Top"});
       
     } else if (source == "New") {
-      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabActive, styles.tabInactive],lead: "New"});
+      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabFontInactive, styles.tabActive, styles.tabFontActive, styles.tabInactive, styles.tabFontInactive],lead: "New"});
     } else {
-      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabInactive, styles.tabActive],lead: "New"});
+      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive, styles.tabActive, styles.tabFontActive],lead: "New"});
     }
+  }
+  addToLeaderBoard(res) {
+    var items = [];
+    for (var i = 0; i < res.length; i++) {
+      items.push({
+                 _key: res[i]._id,
+                 id: res[i].playlistId,
+                 name: res[i].playlistName,
+                 username: res[i].userId,
+                 score: res[i].score,
+                 type1: "Top",
+                 vote: res[i].vote
+                 });
+    }
+    console.log("Playlist Contents");
+    console.log(items);
+    this.setState({
+                  dbArrayTop: items,
+                  dataSourceTop: this.state.dataSourceTop.cloneWithRows(items)
+                  });
+    this.setState({
+                  dbArrayNew: items,
+                  dataSourceNew: this.state.dataSourceNew.cloneWithRows(items)
+                  });
+  }
+  listenFjord() {
+    var data = { playlistName: this.props.name, playlistId: this.props.id, userId: this.props.user };
+    return fetch(ip+':8888/Top', {method: 'GET', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}})
+    .then((response) => response.json()).then((responseJSON) => this.addToLeaderBoard(responseJSON))
+    .catch((error) => {
+           console.error(error);
+           });
   }
   listenForItems(itemsRef) {
     itemsRef.orderByChild("score").once('value', (snap) => {
@@ -138,7 +179,8 @@ class Leaderboard extends Component {
   }
   componentDidMount() {
     console.log("TEst");
-    this.listenForItems(this.itemsRef);
+    this.listenFjord();
+    //this.listenForItems(this.itemsRef);
   }
   switchTab(input) {
     if (input == "Top") {
@@ -153,13 +195,13 @@ class Leaderboard extends Component {
       <View style={{flex: 8, backgroundColor:this.props.BG}}>
         <View style={{flex:1, backgroundColor: this.props.BG, flexDirection: 'row', alignItems:'center', justifyContent:'center', marginLeft:50, marginRight:50}}>
            <TouchableHighlight  style={this.state.tabStyles[0]} onPress={() => this.switchDataSource("Top")}>
-           <Text style={styles.tabFont}>Top</Text>
+           <Text style={this.state.tabStyles[1]}>Top</Text>
            </TouchableHighlight>
-           <TouchableHighlight style={this.state.tabStyles[1]} onPress={() => this.switchDataSource("New")}>
-           <Text style={styles.tabFont}>New</Text>
+           <TouchableHighlight style={this.state.tabStyles[2]} onPress={() => this.switchDataSource("New")}>
+           <Text style={this.state.tabStyles[3]}>New</Text>
            </TouchableHighlight>
-           <TouchableHighlight style={this.state.tabStyles[2]} onPress={() => this.switchDataSource("Friends")}>
-           <Text style={styles.tabFont}>Friends</Text>
+           <TouchableHighlight style={this.state.tabStyles[4]} onPress={() => this.switchDataSource("Friends")}>
+           <Text style={this.state.tabStyles[5]}>Friends</Text>
            </TouchableHighlight>
         </View>
         <View style={{flex: 7, backgroundColor: this.props.BG}}>

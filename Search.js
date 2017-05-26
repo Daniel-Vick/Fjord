@@ -1,3 +1,4 @@
+import NavigationBar from 'react-native-navbar'
 import React, { Component, } from 'react'
 import { View, TextInput, Text, Button, ListView, TouchableHighlight, AsyncStorage} from 'react-native'
 import Song from './Song.js'
@@ -18,6 +19,15 @@ class Search extends Component {
   
   _navigate() {
     this.props.navigator.pop();
+  }
+  test() {
+    var new_url = "";
+    return fetch('http://192.241.219.250:8888/Insert', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify({"public":false})})
+    .then((response) => console.log(response))
+                            
+    .catch((error) => {
+           console.error(error);
+           });
   }
   search() {
     var that = this;
@@ -54,7 +64,7 @@ class Search extends Component {
             <TextInput style={{flex: 1, backgroundColor: this.props.BG, color: 'white', marginLeft:10}} placeholder="Type here!" onChangeText={(text) => this.setState({search: text})}/>
         <Button
             style={{flex:1, marginTop:10}}
-            onPress={() => this.search()}
+            onPress={() => this.test()}
             title="Search"
             color="#FFFFFF"
           />
