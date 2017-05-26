@@ -18,17 +18,17 @@ var ip = 'http://192.168.1.90';
 var styles = StyleSheet.create({
     tabInactive: {
        //flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
-        flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
+                               flex:1, flexDirection: 'row', backgroundColor: "#7DC1B6", alignItems:'center', justifyContent:'center', marginBottom: 5
                                
     },
     tabActive: {
-       flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
+                               flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderBottomWidth: 2, borderColor: 'white'
     },
     tabFontActive: {
-      color: 'white', fontWeight: 'bold', fontSize: 15
+      color: 'white', fontSize: 20
     },
     tabFontInactive: {
-      color: "white", fontWeight: 'bold', fontSize: 15
+      color: 'white', fontSize: 18
     }
 
 });
@@ -38,8 +38,6 @@ const textColor = "#7DC1B6";
 class Leaderboard extends Component {
   constructor(props) {
     super(props);
-    this.itemsRef = this.props.firebaseApp.database().ref();
-    //this.state = {text: 'moonpie51', dataSource: ds, playlists: ds.cloneWithRows([""])};
     this.updateLead = this.updateLead.bind(this);
     var dsTop = new ListView.DataSource({
                                         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -113,73 +111,47 @@ class Leaderboard extends Component {
            console.error(error);
            });
   }
-  listenForItems(itemsRef) {
-    itemsRef.orderByChild("score").once('value', (snap) => {
-
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          _key: child.key,
-          id: child.val().id,
-          name: child.val().name,
-          username: child.val().username,
-          score: child.val().score,
-          type1: "Top",
-                   vote: 0
-        });
-      });
-      items = items.reverse();
-
-      this.setState({
-                    dbArrayTop: items,
-        dataSourceTop: this.state.dataSourceTop.cloneWithRows(items)
-      });
-    });
-    itemsRef.once('value', (snap) => {
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          _key: child.key,
-          id: child.val().id,
-          name: child.val().name,
-          username: child.val().username,
-          score: child.val().score,
-          type2: "New",
-                   vote: 0
-        });
-      });
-      items = items.reverse();
-                                        
-      this.setState({
-                    dbArrayNew: items,
-        dataSourceNew: this.state.dataSourceNew.cloneWithRows(items)
-      });
-    });
-  }
   updateLead(key, val, vote) {
-
     var updatedNew = this.state.dbArrayNew.slice();
     var updatedTop = this.state.dbArrayTop.slice();
-    console.log("##########");
-    console.log(updatedTop);
     for (var i = 0; i < this.state.dbArrayNew.length; i++) {
       if (key == this.state.dbArrayNew[i]._key) {
-        console.log("@#$@#$@#%#%#^$$%#^%#$^##^");
-
-        updatedNew[i] = {_key: key, id: updatedNew[i].id, name: updatedNew[i].name, username: updatedNew[i].username, score: val, type2: "New", vote: vote}
+        updatedNew[i] = {_key: key,
+                         id: updatedNew[i].id,
+                         name: updatedNew[i].name,
+                         username: updatedNew[i].username,
+                         score: val,
+                         type2: "New",
+                         vote: vote}
 
       } else {
-        updatedNew[i] = {_key: updatedNew[i]._key, id: updatedNew[i].id, name: updatedNew[i].name, username: updatedNew[i].username, score: updatedNew[i].score, type2: "New", vote: updatedNew[i].vote}
+        updatedNew[i] = {_key: updatedNew[i]._key,
+                         id: updatedNew[i].id,
+                         name: updatedNew[i].name,
+                         username: updatedNew[i].username,
+                         score: updatedNew[i].score,
+                         type2: "New",
+                         vote: updatedNew[i].vote}
       }
     }
     for (var i = 0; i < this.state.dbArrayTop.length; i++) {
       if (key == this.state.dbArrayTop[i]._key) {
 
-        updatedTop[i] = {_key: key, id: updatedTop[i].id, name: updatedTop[i].name, username: updatedTop[i].username, score: val, type1: "Top", vote: vote}
+        updatedTop[i] = {_key: key,
+                         id: updatedTop[i].id,
+                         name: updatedTop[i].name,
+                         username: updatedTop[i].username,
+                         score: val,
+                         type1: "Top",
+                         vote: vote}
       } else {
-        updatedTop[i] = {_key: updatedTop[i]._key, id: updatedTop[i].id, name: updatedTop[i].name, username: updatedTop[i].username, score: updatedTop[i].score, type1: "Top", vote: updatedTop[i].vote}
+        updatedTop[i] = {_key: updatedTop[i]._key,
+                         id: updatedTop[i].id,
+                         name: updatedTop[i].name,
+                         username: updatedTop[i].username,
+                         score: updatedTop[i].score,
+                         type1: "Top",
+                         vote: updatedTop[i].vote}
       }
     }
     this.setState({dataSourceNew: this.state.dataSourceNew.cloneWithRows(updatedNew), dataSourceTop: this.state.dataSourceTop.cloneWithRows(updatedTop), dbArrayTop: updatedTop, dbArrayNew: updatedNew});
@@ -192,9 +164,15 @@ class Leaderboard extends Component {
     })
   }
   componentDidMount() {
-    console.log("TEst");
     this.listenFjord();
-    //this.listenForItems(this.itemsRef);
+    navigator.geolocation.getCurrentPosition(
+                                             (position) => {
+                                             var initialPosition = JSON.stringify(position);
+                                             alert(initialPosition);
+                                             },
+                                             (error) => alert(JSON.stringify(error)),
+                                             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+                                             );
   }
   switchTab(input) {
     if (input == "Top") {
@@ -206,19 +184,20 @@ class Leaderboard extends Component {
   test
   render() {
     return(
-      <View style={{flex: 8, backgroundColor:this.props.BG}}>
-        <View style={{flex:1, backgroundColor: this.props.BG, flexDirection: 'row', alignItems:'center', justifyContent:'center', marginLeft:50, marginRight:50}}>
-           <TouchableHighlight  style={this.state.tabStyles[0]} onPress={() => this.switchDataSource("Top")}>
-           <Text style={this.state.tabStyles[1]}>Top</Text>
-           </TouchableHighlight>
+      <View style={{flex: 10, backgroundColor:this.props.BG}}>
+        <View style={{flex:1, backgroundColor: "#7DC1B6", flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end'}}>
+           
            <TouchableHighlight style={this.state.tabStyles[2]} onPress={() => this.switchDataSource("New")}>
            <Text style={this.state.tabStyles[3]}>New</Text>
+           </TouchableHighlight>
+           <TouchableHighlight  style={this.state.tabStyles[0]} onPress={() => this.switchDataSource("Top")}>
+           <Text style={this.state.tabStyles[1]}>Top</Text>
            </TouchableHighlight>
            <TouchableHighlight style={this.state.tabStyles[4]} onPress={() => this.switchDataSource("Friends")}>
            <Text style={this.state.tabStyles[5]}>Friends</Text>
            </TouchableHighlight>
         </View>
-        <View style={{flex: 7, backgroundColor: this.props.BG}}>
+        <View style={{flex: 9, backgroundColor: this.props.BG}}>
            {this.switchTab(this.state.lead)}
         </View>
       </View>
