@@ -68,27 +68,41 @@ class Leaderboard extends Component {
     }
   }
   addToLeaderBoard(res) {
-    var items = [];
-    for (var i = 0; i < res.length; i++) {
-      items.push({
-                 _key: res[i]._id,
-                 id: res[i].playlistId,
-                 name: res[i].playlistName,
-                 username: res[i].userId,
-                 score: res[i].score,
+    var itemsTop = [];
+    var itemsNew = [];
+    for (var i = 0; i < res.top.length; i++) {
+      itemsTop.push({
+                 _key: res.top[i]._id,
+                 id: res.top[i].playlistId,
+                 name: res.top[i].playlistName,
+                 username: res.top[i].userId,
+                 score: res.top[i].score,
                  type1: "Top",
-                 vote: res[i].vote
+                 vote: res.top[i].vote
                  });
     }
-    console.log("Playlist Contents");
-    console.log(items);
+    for (var i = 0; i < res.newSort.length; i++) {
+      itemsNew.push({
+                    _key: res.newSort[i]._id,
+                    id: res.newSort[i].playlistId,
+                    name: res.newSort[i].playlistName,
+                    username: res.newSort[i].userId,
+                    score: res.newSort[i].score,
+                    type1: "Top",
+                    vote: res.newSort[i].vote
+                    });
+    }
+    console.log("Playlist Contents Top");
+    console.log(itemsTop);
+    console.log("Playlist Contents New");
+    console.log(itemsNew);
     this.setState({
-                  dbArrayTop: items,
-                  dataSourceTop: this.state.dataSourceTop.cloneWithRows(items)
+                  dbArrayTop: itemsTop,
+                  dataSourceTop: this.state.dataSourceTop.cloneWithRows(itemsTop)
                   });
     this.setState({
-                  dbArrayNew: items,
-                  dataSourceNew: this.state.dataSourceNew.cloneWithRows(items)
+                  dbArrayNew: itemsNew,
+                  dataSourceNew: this.state.dataSourceNew.cloneWithRows(itemsNew)
                   });
   }
   listenFjord() {

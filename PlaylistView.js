@@ -56,19 +56,20 @@ class PlaylistView extends Component {
   }
   _upVote(input1, input2, input3, input4, input5) {
     var scoreChange = 1;
-    var data = { playlistId: this.props.id, userId: this.props.user };
+    var data = { playlistId: this.props.id, userId: this.props.user, score: 0};
     if (!(this.props.vote === 1)) {
       if (this.props.vote == -1) {
         scoreChange++;
       }
       //this.props.db.database().ref(input5+'/upvotes').push({Username: input1});
-      
+      data.score = this.props.score + scoreChange;
       this.upvoteAdd(data);
       if (scoreChange > 1) this.downvoteRemove(data);
       
       this.props.updateLead(this.props._key, this.props.score + scoreChange, 1);
       //this.props.db.database().ref(input5).update({score: this.props.score + scoreChange});
     } else {
+            data.score = this.props.score -1;
       this.upvoteRemove(data)
       this.props.updateLead(this.props._key, this.props.score - 1, 0);
       //this.props.db.database().ref(input5).update({score: this.props.score - 1});
@@ -83,12 +84,14 @@ class PlaylistView extends Component {
       if (this.props.vote === 1) {
         scoreChange++;
       }
+      data.score = this.props.score - scoreChange;
       this.downvoteAdd(data);
       if (scoreChange > 1) this.upvoteRemove(data);
       //this.props.db.database().ref(input5+'/downvotes').push({Username: input1});
       this.props.updateLead(this.props._key, this.props.score - scoreChange, -1);
       //this.props.db.database().ref(input5).update({score: this.props.score - scoreChange});
     } else {
+            data.score = this.props.score + 1;
       this.downvoteRemove(data);
       this.props.updateLead(this.props._key, this.props.score + 1, 0);
       //this.props.db.database().ref(input5).update({score: this.props.score + 1});
