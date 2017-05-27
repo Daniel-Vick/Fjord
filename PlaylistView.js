@@ -1,11 +1,11 @@
 import React, { Component, } from 'react'
-import { View, Text, TouchableHighlight, StyleSheet} from 'react-native'
+import { View, Text, TouchableHighlight, Image, StyleSheet} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as firebase from 'firebase'
 
 var styles = StyleSheet.create({
-                               title: {flex:2, color:"white", fontWeight:'bold', fontSize:15, marginTop:5},
-                               user:  {flex:1, color:"white", fontSize:12, marginBottom:5}
+                               title: {flex:2, color:"white", fontWeight:'bold', fontSize:18, marginTop:5},
+                               user:  {flex:1, color:"white", fontSize:15, marginBottom:5}
                                
                                
                                });
@@ -98,24 +98,28 @@ class PlaylistView extends Component {
     }
     
   }
+
   render() {
     return(
            <View style={{flex: 1, flexDirection: 'row', marginLeft:10, marginRight:10}} >
 
            <TouchableHighlight onPress={() => this._navigate(this.props.user, this.props.id, this.props.name)} style={{flex: 9, borderBottomWidth:0.5, borderColor:"white"}}>
-            <View style={{flex:1}}>
+           <View style={{flex:1, flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+           <Image style={{width: 50, height: 50}} source={{uri: this.props.artwork}}/>
+           <View style={{marginLeft: 10}}>
               <Text style={styles.title}>{this.props.name}</Text>
               <Text style={styles.user}>{this.props.user}</Text>
+              </View>
             </View>
            </TouchableHighlight>
 
-           <View style={{flex:1, paddingTop: 5, borderBottomWidth:0.5, borderColor:"white"}}>
+           <View style={{flex:1, paddingTop:10, paddingBottom:10, borderBottomWidth:0.5, borderColor:"white"}}>
            <TouchableHighlight onPress={() => this._upVote(this.props.user, this.props.id, this.props.name, this.props.score, this.props._key)} style={{justifyContent:'center', marginRight:10}}>
-            <Icon name="chevron-up" size={15} color={this.state.upVoteColor[this.props.vote + 1]} />
+            <Icon name="chevron-up" size={25} color={this.state.upVoteColor[this.props.vote + 1]} />
             </TouchableHighlight>
 
             <TouchableHighlight onPress={() => this._downVote(this.props.user, this.props.id, this.props.name, this.props.score, this.props._key)} style={{justifyContent:'center', marginRight:10}}>
-            <Icon name="chevron-down" size={15} color={this.state.downVoteColor[this.props.vote + 1]} />
+            <Icon name="chevron-down" size={25} color={this.state.downVoteColor[this.props.vote + 1]} />
             </TouchableHighlight>
 
            </View>

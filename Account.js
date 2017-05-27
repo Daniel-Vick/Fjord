@@ -20,11 +20,15 @@ class Account extends Component {
       .then((response) => response.json()).then((responseJson) => {
         var items = responseJson.items;
         var playlistIds = [];
+                                                console.log("ITEMS");
         for (i = 0; i < items.length; i++) {
-          playlistIds.push([items[i].id, items[i].name, items[i].owner.id]);
-                                                console.log("##############id###########");
-                                                console.log(items[i].id);
+          playlistIds.push([items[i].id,
+                            items[i].name,
+                            items[i].owner.id,
+                            items[i].images[0].url
+                           ]);
         }
+                                                console.log(playlistIds);
         that.setState({playlists:that.state.dataSource.cloneWithRows(playlistIds)});
       })
       .catch((error) => {
@@ -39,19 +43,23 @@ class Account extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: this.props.BG}}>
-        <View style={{flexDirection: 'row', marginTop:20, marginLeft:5, marginRight:5}}>
-            <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 0.5, backgroundColor: this.props.BG}}>
+      <View style={{flex: 10, backgroundColor: this.props.BG}}>
+        <View style={{flex: 1, backgroundColor: "#7DC1B6", flexDirection: 'row'}}>
+            <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex:1, marginTop: 25, paddingLeft: 5}}>
             <Icon
             name={"chevron-left"}
             color={"white"}
-            size={20}
+            size={25}
             />
             </TouchableHighlight>
-            <Text style={{color:'white'}}>Your Playlists</Text>
+            <View style={{marginTop:25, flex: 8, alignItems:'center'}}>
+            <Text style={{color:'white', fontSize: 18}}>Your Playlists</Text>
+            </View>
+            <View style={{flex:1}}>
+            </View>
         </View>
-        <View style={{flex: 7.5, backgroundColor: this.props.BG}}>
-            <ListView dataSource={this.state.playlists} renderRow={(rowData) => <AccountPlaylist firebaseApp={this.props.firebaseApp} id={rowData[0]} name={rowData[1]} user={rowData[2]} score={0}/>}/>
+        <View style={{flex: 9, backgroundColor: this.props.BG}}>
+            <ListView dataSource={this.state.playlists} renderRow={(rowData) => <AccountPlaylist firebaseApp={this.props.firebaseApp} id={rowData[0]} name={rowData[1]} user={rowData[2]} score={0} artwork={rowData[3]}/>}/>
         </View>
       </View>
     )

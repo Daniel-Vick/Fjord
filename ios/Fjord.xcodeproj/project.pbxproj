@@ -34,6 +34,7 @@
 		23342DDD1E80AD5B006554F0 /* Song.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD41E80AD5B006554F0 /* Song.js */; };
 		23342DFF1E80AFEC006554F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342DFE1E80AFEC006554F0 /* AVFoundation.framework */; };
 		23342E011E80AFFA006554F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342E001E80AFFA006554F0 /* SystemConfiguration.framework */; };
+		2386643A1ED9686B00764409 /* FjordLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 238664391ED9686B00764409 /* FjordLogo.png */; };
 		23E208421E825FB200792178 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208381E825FB200792178 /* Entypo.ttf */; };
 		23E208431E825FB200792178 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208381E825FB200792178 /* Entypo.ttf */; };
 		23E208441E825FB200792178 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208391E825FB200792178 /* EvilIcons.ttf */; };
@@ -297,6 +298,7 @@
 		23342DD41E80AD5B006554F0 /* Song.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Song.js; path = ../Song.js; sourceTree = "<group>"; };
 		23342DFE1E80AFEC006554F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		23342E001E80AFFA006554F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		238664391ED9686B00764409 /* FjordLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FjordLogo.png; path = ../FjordLogo.png; sourceTree = "<group>"; };
 		23E208381E825FB200792178 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		23E208391E825FB200792178 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		23E2083A1E825FB200792178 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 		13B07FAE1A68108700A75B9A /* Fjord */ = {
 			isa = PBXGroup;
 			children = (
+				238664391ED9686B00764409 /* FjordLogo.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -963,6 +966,7 @@
 				23E208421E825FB200792178 /* Entypo.ttf in Resources */,
 				23342DD61E80AD5B006554F0 /* AccountPlaylist.js in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				2386643A1ED9686B00764409 /* FjordLogo.png in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				233007E51E960653004A397B /* Login.js in Resources */,
 				23E208481E825FB200792178 /* Foundation.ttf in Resources */,

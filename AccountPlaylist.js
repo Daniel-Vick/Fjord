@@ -1,5 +1,5 @@
 import React, { Component, } from 'react'
-import { View, Text, TouchableHighlight} from 'react-native'
+import { View, Text, TouchableHighlight, Image} from 'react-native'
 import * as firebase from 'firebase';
 
 //           <TouchableHighlight onPress={() => this._add(this.props.user, this.props.id, this.props.name, this.props.score)} style={{flex:1, borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
@@ -15,7 +15,7 @@ class AccountPlaylist extends Component {
     this.itemsRef.push({ username: input1, id: input2, name: input3, score: input4})
   }
   addPlaylist() {
-    var data = { playlistName: this.props.name, playlistId: this.props.id, userId: this.props.user };
+    var data = { playlistName: this.props.name, playlistId: this.props.id, userId: this.props.user, artwork: this.props.artwork };
     return fetch(ip+':8888/AddPlaylist', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
     .then((response) => console.log(response))
     
@@ -23,14 +23,25 @@ class AccountPlaylist extends Component {
            console.error(error);
            });
   }
+  componentDidMount() {
+    console.log("Artwork Address");
+    console.log(this.props.artwork);
+  }
   render() {
     return(
            <TouchableHighlight onPress={() => this.addPlaylist()} style={{flex:1, borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
-           <View style={{flex:1}}>
-           <Text style={{flex:2, color:"white", fontWeight:'bold', fontSize:15, marginTop:5}}>{this.props.name}</Text>
-           <Text style={{flex:1, color:"#BBBBBB", fontSize:12, marginBottom:5}}>{this.props.user}</Text>
-        </View>
-      </TouchableHighlight>
+           <View style={{flex:1, flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+              <Image style={{width: 50, height: 50}} source={{uri: this.props.artwork}}/>
+              <View style={{marginLeft:10}}>
+                <Text style={{flex:2, color:"white", fontWeight:'bold', fontSize:18, marginTop:5}}>
+                  {this.props.name}
+                </Text>
+                <Text style={{flex:1, color:"#BBBBBB", fontSize:15, marginBottom:5}}>
+                  {this.props.user}
+                </Text>
+              </View>
+            </View>
+           </TouchableHighlight>
     );
   }
 }

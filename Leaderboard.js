@@ -18,17 +18,17 @@ var ip = 'http://192.168.1.90';
 var styles = StyleSheet.create({
     tabInactive: {
        //flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
-                               flex:1, flexDirection: 'row', backgroundColor: "#7DC1B6", alignItems:'center', justifyContent:'center', marginBottom: 5
+                               flex:1, flexDirection: 'row', backgroundColor: "#7DC1B6", alignItems:'center', justifyContent:'center', marginBottom: 10
                                
     },
     tabActive: {
-                               flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderBottomWidth: 2, borderColor: 'white'
+                               flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderBottomWidth: 2, borderColor: 'white', paddingBottom:7
     },
     tabFontActive: {
-      color: 'white', fontSize: 20
+      color: 'white', fontSize: 23
     },
     tabFontInactive: {
-      color: 'white', fontSize: 18
+      color: 'white', fontSize: 20
     }
 
 });
@@ -70,25 +70,27 @@ class Leaderboard extends Component {
     var itemsNew = [];
     for (var i = 0; i < res.top.length; i++) {
       itemsTop.push({
-                 _key: res.top[i]._id,
-                 id: res.top[i].playlistId,
-                 name: res.top[i].playlistName,
-                 username: res.top[i].userId,
-                 score: res.top[i].score,
-                 type1: "Top",
-                 vote: res.top[i].vote
-                 });
+                  _key: res.top[i]._id,
+                  id: res.top[i].playlistId,
+                  name: res.top[i].playlistName,
+                  username: res.top[i].userId,
+                  artwork: res.top[i].artwork,
+                  score: res.top[i].score,
+                  type1: "Top",
+                  vote: res.top[i].vote
+                  });
     }
     for (var i = 0; i < res.newSort.length; i++) {
       itemsNew.push({
-                    _key: res.newSort[i]._id,
-                    id: res.newSort[i].playlistId,
-                    name: res.newSort[i].playlistName,
-                    username: res.newSort[i].userId,
-                    score: res.newSort[i].score,
-                    type1: "Top",
-                    vote: res.newSort[i].vote
-                    });
+                  _key: res.newSort[i]._id,
+                  id: res.newSort[i].playlistId,
+                  name: res.newSort[i].playlistName,
+                  username: res.newSort[i].userId,
+                  artwork: res.newSort[i].artwork,
+                  score: res.newSort[i].score,
+                  type1: "Top",
+                  vote: res.newSort[i].vote
+                  });
     }
     console.log("Playlist Contents Top");
     console.log(itemsTop);
@@ -120,6 +122,7 @@ class Leaderboard extends Component {
                          id: updatedNew[i].id,
                          name: updatedNew[i].name,
                          username: updatedNew[i].username,
+                         artwork: updatedNew[i].artwork,
                          score: val,
                          type2: "New",
                          vote: vote}
@@ -129,6 +132,7 @@ class Leaderboard extends Component {
                          id: updatedNew[i].id,
                          name: updatedNew[i].name,
                          username: updatedNew[i].username,
+                         artwork: updatedNew[i].artwork,
                          score: updatedNew[i].score,
                          type2: "New",
                          vote: updatedNew[i].vote}
@@ -141,6 +145,7 @@ class Leaderboard extends Component {
                          id: updatedTop[i].id,
                          name: updatedTop[i].name,
                          username: updatedTop[i].username,
+                         artwork: updatedTop[i].artwork,
                          score: val,
                          type1: "Top",
                          vote: vote}
@@ -149,11 +154,14 @@ class Leaderboard extends Component {
                          id: updatedTop[i].id,
                          name: updatedTop[i].name,
                          username: updatedTop[i].username,
+                         artwork: updatedTop[i].artwork,
                          score: updatedTop[i].score,
                          type1: "Top",
                          vote: updatedTop[i].vote}
       }
     }
+    console.log(updatedTop);
+    console.log(updatedNew);
     this.setState({dataSourceNew: this.state.dataSourceNew.cloneWithRows(updatedNew), dataSourceTop: this.state.dataSourceTop.cloneWithRows(updatedTop), dbArrayTop: updatedTop, dbArrayNew: updatedNew});
     console.log(updatedTop);
 
@@ -176,9 +184,9 @@ class Leaderboard extends Component {
   }
   switchTab(input) {
     if (input == "Top") {
-      return (<ListView dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote}/>}/>);
+      return (<ListView dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote} artwork={rowData.artwork}/>}/>);
     } else if (input == "New") {
-      return (<ListView dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote}/>}/>);
+      return (<ListView dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote} artwork={rowData1.artwork}/>}/>);
     }
   }
   test
