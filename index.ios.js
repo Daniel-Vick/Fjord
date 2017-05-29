@@ -43,8 +43,6 @@ export default class Fjord extends Component {
   
   setAuth(input) {
     this.setState({auth: input});
-    console.log("########################");
-    console.log(this.state.auth);
   }
   
   renderScene(route, navigator) {
@@ -58,7 +56,7 @@ export default class Fjord extends Component {
      return <Search BG={BGColor} auth={auth} navigator={navigator} />
    }
     if(route.name == 'Account') {
-     return <Account BG={BGColor} firebaseApp={firebaseApp} username="moonpie51" auth={this.auth} navigator={navigator} />
+     return <Account BG={BGColor} firebaseApp={firebaseApp} auth={this.state.auth} navigator={navigator} />
    }
     if(route.name == 'Login') {
       return <Login navigator={navigator}/>
@@ -74,10 +72,11 @@ export default class Fjord extends Component {
       
       var auth = navState.url.substring(42, i);
       console.log(auth);
-      const AUTH_KEY = 'AUTH_KEY'
-      const authObj = {auth_key: auth}
-      AsyncStorage.setItem(AUTH_KEY, JSON.stringify(authObj));
-      this.setState({loggedIn: true});
+      const AUTH_KEY = 'AUTH_KEY';
+
+      //const authObj = {auth_key: auth}
+      AsyncStorage.setItem(AUTH_KEY, auth);
+      this.setState({loggedIn: true, auth: auth});
     }
     
   }

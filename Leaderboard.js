@@ -8,6 +8,7 @@ import { Text,
   TouchableHighlight,
   ListView,
   AlertIOS,
+  RefreshControl,
   Button } from 'react-native'
 import PlaylistView from './PlaylistView'
 import MenuBar from './MenuBar.js'
@@ -46,6 +47,7 @@ class Leaderboard extends Component {
                                         rowHasChanged: (row1, row2) => row1 !== row2,
                                         })
     this.state = {
+    refreshing: false,
     dataSourceTop: dsTop,
     dataSourceNew: dsNew,
     dbArrayTop: null,
@@ -92,10 +94,7 @@ class Leaderboard extends Component {
                   vote: res.newSort[i].vote
                   });
     }
-    console.log("Playlist Contents Top");
-    console.log(itemsTop);
-    console.log("Playlist Contents New");
-    console.log(itemsNew);
+
     this.setState({
                   dbArrayTop: itemsTop,
                   dataSourceTop: this.state.dataSourceTop.cloneWithRows(itemsTop)
@@ -160,33 +159,38 @@ class Leaderboard extends Component {
                          vote: updatedTop[i].vote}
       }
     }
-    console.log(updatedTop);
-    console.log(updatedNew);
-    this.setState({dataSourceNew: this.state.dataSourceNew.cloneWithRows(updatedNew), dataSourceTop: this.state.dataSourceTop.cloneWithRows(updatedTop), dbArrayTop: updatedTop, dbArrayNew: updatedNew});
-    console.log(updatedTop);
 
+    this.setState({dataSourceNew: this.state.dataSourceNew.cloneWithRows(updatedNew), dataSourceTop: this.state.dataSourceTop.cloneWithRows(updatedTop), dbArrayTop: updatedTop, dbArrayNew: updatedNew});
   }
   _navigate(input1, input2) {
     this.props.navigator.push({
       name: 'Playlist', url: 'test.com', username:input1, id:input2// Matches route.name
     })
   }
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this.listenFjord().then(() => {
+                     this.setState({refreshing: false});
+                     });
+  }
   componentDidMount() {
     this.listenFjord();
-    navigator.geolocation.getCurrentPosition(
-                                             (position) => {
-                                             var initialPosition = JSON.stringify(position);
-                                             alert(initialPosition);
-                                             },
-                                             (error) => alert(JSON.stringify(error)),
-                                             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-                                             );
   }
   switchTab(input) {
     if (input == "Top") {
-      return (<ListView dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote} artwork={rowData.artwork}/>}/>);
+      return (<ListView refreshControl={
+              <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+              />
+              } dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote} artwork={rowData.artwork}/>}/>);
     } else if (input == "New") {
-      return (<ListView dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote} artwork={rowData1.artwork}/>}/>);
+      return (<ListView refreshControl={
+              <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+              />
+              } dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote} artwork={rowData1.artwork}/>}/>);
     }
   }
   test

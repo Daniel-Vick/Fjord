@@ -30,8 +30,7 @@ class Playlist extends Component {
   }
   componentDidMount() {
     AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
-                                          console.log("##########TEST DB#############");
-                                          console.log(this.getSongs(JSON.parse(authStr).auth_key));
+                                          this.getSongs(authStr);
                                           });
   }
   getSongs(auth_key) {

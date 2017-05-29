@@ -13,14 +13,14 @@ class Account extends Component {
   _navigate() {
     this.props.navigator.pop();
   }
-  getPlaylists(auth_key) {
+  getPlaylists(auth_key, id) {
+    console.log(id);
     var that = this;
-    var new_url = "https://api.spotify.com/v1/users/" + this.props.username + "/playlists";
-    return fetch('https://api.spotify.com/v1/users/moonpie51/playlists', {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + auth_key}})
+    var new_url = "https://api.spotify.com/v1/users/" + id + "/playlists";
+    return fetch(new_url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + this.props.auth}})
       .then((response) => response.json()).then((responseJson) => {
         var items = responseJson.items;
         var playlistIds = [];
-                                                console.log("ITEMS");
         for (i = 0; i < items.length; i++) {
           playlistIds.push([items[i].id,
                             items[i].name,
@@ -28,7 +28,6 @@ class Account extends Component {
                             items[i].images[0].url
                            ]);
         }
-                                                console.log(playlistIds);
         that.setState({playlists:that.state.dataSource.cloneWithRows(playlistIds)});
       })
       .catch((error) => {
@@ -36,10 +35,22 @@ class Account extends Component {
       });
   }
   componentDidMount() {
-    AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
-                                          console.log("##########TEST DB#############");
-                                          console.log(this.getPlaylists(JSON.parse(authStr).auth_key));
-                                          });
+    var that = this;
+    var url = 'https://api.spotify.com/v1/me';
+    fetch(url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + this.props.auth}})
+    .then((response) => response.json()).then((responseJson) => {
+                                              console.log(responseJson);
+                                              AsyncStorage.setItem('USER_INFO', responseJson.id)
+            })
+    .then(() => {AsyncStorage.multiGet(['AUTH_KEY', 'USER_INFO'], (err, res) => {
+                                                            console.log(res)
+                                                            that.getPlaylists(res[0][1], res[1][1])})})
+    .catch((error) => {
+           console.error(error);
+           });
+    AsyncStorage.multiGet(['AUTH_KEY', 'USER_INFO'], (err, res) => {
+                          console.log(res)
+                          that.getPlaylists(res[0][1], res[1][1])});
   }
   render() {
     return (

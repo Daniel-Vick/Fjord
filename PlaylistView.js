@@ -24,32 +24,24 @@ class PlaylistView extends Component {
   }
   upvoteAdd(data) {
     fetch(ip+':8888/AddUpvote', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then((response) => console.log(response))
-    
     .catch((error) => {
            console.error(error);
            });
   }
   upvoteRemove(data) {
     fetch(ip+':8888/RemoveUpvote', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then((response) => console.log(response))
-    
     .catch((error) => {
            console.error(error);
            });
   }
   downvoteAdd(data) {
     fetch(ip+':8888/AddDownvote', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then((response) => console.log(response))
-    
     .catch((error) => {
            console.error(error);
            });
   }
   downvoteRemove(data) {
     fetch(ip+':8888/RemoveDownvote', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then((response) => console.log(response))
-    
     .catch((error) => {
            console.error(error);
            });
@@ -61,25 +53,20 @@ class PlaylistView extends Component {
       if (this.props.vote == -1) {
         scoreChange++;
       }
-      //this.props.db.database().ref(input5+'/upvotes').push({Username: input1});
       data.score = this.props.score + scoreChange;
       this.upvoteAdd(data);
       if (scoreChange > 1) this.downvoteRemove(data);
-      
       this.props.updateLead(this.props._key, this.props.score + scoreChange, 1);
-      //this.props.db.database().ref(input5).update({score: this.props.score + scoreChange});
     } else {
             data.score = this.props.score -1;
       this.upvoteRemove(data)
       this.props.updateLead(this.props._key, this.props.score - 1, 0);
-      //this.props.db.database().ref(input5).update({score: this.props.score - 1});
     }
     
   }
   _downVote(input1, input2, input3, input4, input5) {
     var scoreChange = 1;
     var data = { playlistId: this.props.id, userId: this.props.user };
-    console.log(this.props.vote);
     if (!(this.props.vote === -1)) {
       if (this.props.vote === 1) {
         scoreChange++;
@@ -87,14 +74,11 @@ class PlaylistView extends Component {
       data.score = this.props.score - scoreChange;
       this.downvoteAdd(data);
       if (scoreChange > 1) this.upvoteRemove(data);
-      //this.props.db.database().ref(input5+'/downvotes').push({Username: input1});
       this.props.updateLead(this.props._key, this.props.score - scoreChange, -1);
-      //this.props.db.database().ref(input5).update({score: this.props.score - scoreChange});
     } else {
             data.score = this.props.score + 1;
       this.downvoteRemove(data);
       this.props.updateLead(this.props._key, this.props.score + 1, 0);
-      //this.props.db.database().ref(input5).update({score: this.props.score + 1});
     }
     
   }

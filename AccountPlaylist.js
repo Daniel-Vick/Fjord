@@ -15,17 +15,25 @@ class AccountPlaylist extends Component {
     this.itemsRef.push({ username: input1, id: input2, name: input3, score: input4})
   }
   addPlaylist() {
-    var data = { playlistName: this.props.name, playlistId: this.props.id, userId: this.props.user, artwork: this.props.artwork };
-    return fetch(ip+':8888/AddPlaylist', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
-    .then((response) => console.log(response))
-    
-    .catch((error) => {
-           console.error(error);
-           });
+    //Get geolocation
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+                      var data = { playlistName: this.props.name,
+                                   playlistId: this.props.id,
+                                   userId: this.props.user,
+                                   artwork: this.props.artwork,
+                                   geolocation: position };
+                      console.log(data);
+                      return fetch(ip+':8888/AddPlaylist', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+                      .catch((error) => {
+                        console.error(error);
+                        });
+                      },
+      (error) => alert(JSON.stringify(error)),
+          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
   componentDidMount() {
-    console.log("Artwork Address");
-    console.log(this.props.artwork);
   }
   render() {
     return(
