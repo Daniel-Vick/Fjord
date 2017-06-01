@@ -11,7 +11,8 @@ import {
   ListView,
   WebView,
   AsyncStorage,
-  Button
+  Button,
+  NativeModules
 } from 'react-native'
 import MenuBar from './MenuBar.js'
 import Playlist from './Playlist.js'
@@ -19,7 +20,10 @@ import Login from './Login.js'
 import Leaderboard from './Leaderboard.js'
 import Search from './Search.js'
 import Account from './Account.js'
+import CustomTransitions from './CustomTransitions';
 import * as firebase from 'firebase';
+
+const SpotifyModule = NativeModules.SpotifyModule;
 
 const firebaseConfig = {
   apiKey: "AIzaSyC0NxB0xu_72-N5hRLkpP3lM4un2uXUlOw",
@@ -31,7 +35,6 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const BGColor = "#313C4F";
-//const BGColor = 'white';
 
 var auth = "BQBrwwulEww6b13nXXWxGX4TTgdgR7AFy_pSyApJyIex3ShNTZmfvWAEPH_D2OVU8pk-2Qarkc0dv8bZaJvyGCbxkp518d4GAunrTTaCe--zVfsZ-F_LEh5b8eRD1nLeElXBbkM8CRX-f_pkbDLpx9zKK_N9Ep1nRsUF1ssE-g";
 
@@ -40,7 +43,14 @@ export default class Fjord extends Component {
     super(props);
     this.state = {username: '', playlist: '', auth:'', loggedIn: false}
   }
-  
+  onButtonPress() {
+  var that = this;
+    SpotifyModule.authenticate(data => {
+      console.log(data.accessToken);
+      that.setState({loggedIn: true, auth: data.accessToken});
+    });
+    
+  }
   setAuth(input) {
     this.setState({auth: input});
   }
@@ -85,17 +95,23 @@ export default class Fjord extends Component {
     return (
       <Navigator
         navigationBar={<MenuBar />}
+        configureScene={(route, routeStack) => CustomTransitions.NONE}
         initialRoute={{ name: 'Leaderboard'}}
         renderScene={ this.renderScene.bind(this) } />
     );
     } else {
-      return(
+     /* return(
              <WebView
              source={{uri: 'http://192.241.219.250:8888/'}}
              onNavigationStateChange={this.onNavigationStateChange}
              style={{marginTop: 20}}
              />
-             );
+             );*/
+      return(<View style={{paddingTop:40}}>
+        <TouchableHighlight onPress={this.onButtonPress.bind(this)}>
+          <Text>Spotify Auth</Text>
+        </TouchableHighlight>
+      </View>);
     }
   }
 }

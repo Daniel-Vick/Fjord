@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 
 //           <TouchableHighlight onPress={() => this._add(this.props.user, this.props.id, this.props.name, this.props.score)} style={{flex:1, borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
 //192.241.219.250
-var ip = 'http://192.168.1.90';
+var ip = 'http://192.241.219.250';
 
 class AccountPlaylist extends Component {
   constructor(props) {

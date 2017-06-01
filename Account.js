@@ -4,6 +4,8 @@ import AccountPlaylist from './AccountPlaylist'
 import MenuBar from './MenuBar.js'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
+
 class Account extends Component {
   constructor(props) {
     super(props)
@@ -56,17 +58,8 @@ class Account extends Component {
     return (
       <View style={{flex: 10, backgroundColor: this.props.BG}}>
         <View style={{flex: 1, backgroundColor: "#7DC1B6", flexDirection: 'row'}}>
-            <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex:1, marginTop: 25, paddingLeft: 5}}>
-            <Icon
-            name={"chevron-left"}
-            color={"white"}
-            size={25}
-            />
-            </TouchableHighlight>
             <View style={{marginTop:25, flex: 8, alignItems:'center'}}>
             <Text style={{color:'white', fontSize: 18}}>Your Playlists</Text>
-            </View>
-            <View style={{flex:1}}>
             </View>
         </View>
         <View style={{flex: 9, backgroundColor: this.props.BG}}>

@@ -14,7 +14,7 @@ import PlaylistView from './PlaylistView'
 import MenuBar from './MenuBar.js'
 import * as firebase from 'firebase';
 
-var ip = 'http://192.168.1.90';
+var ip = 'http://192.241.219.250';
 
 var styles = StyleSheet.create({
     tabInactive: {

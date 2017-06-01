@@ -10,7 +10,7 @@ var styles = StyleSheet.create({
                                
                                });
 
-var ip = 'http://192.168.1.90';
+var ip = 'http://192.241.219.250';
 
 class PlaylistView extends Component {
   constructor(props) {
