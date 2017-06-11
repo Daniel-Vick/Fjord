@@ -88,13 +88,13 @@ class PlaylistView extends Component {
            <View style={{flex: 1, flexDirection: 'row', marginLeft:10, marginRight:10}} >
 
            <TouchableHighlight onPress={() => this._navigate(this.props.user, this.props.id, this.props.name)} style={{flex: 9, borderBottomWidth:0.5, borderColor:"white"}}>
-           <View style={{flex:1, flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+           <View style={{flex:1, flexDirection: 'row', marginTop: 5, marginBottom: 5, alignItems:'center'}}>
            <Image style={{width: 50, height: 50}} source={{uri: this.props.artwork}}/>
-           <View style={{marginLeft: 10}}>
+             <View style={{marginLeft: 10}}>
               <Text style={styles.title}>{this.props.name}</Text>
               <Text style={styles.user}>{this.props.user}</Text>
-              </View>
-            </View>
+             </View>
+           </View>
            </TouchableHighlight>
 
            <View style={{flex:1, paddingTop:10, paddingBottom:10, borderBottomWidth:0.5, borderColor:"white"}}>

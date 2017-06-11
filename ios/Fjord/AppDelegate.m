@@ -12,12 +12,20 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "SpotifyModule.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+
   NSURL *jsCodeLocation;
+  NSError *setCategoryErr = nil;
+  NSError *activationErr  = nil;
+  [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:&setCategoryErr];
+  [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 

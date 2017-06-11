@@ -78,6 +78,23 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
   [[UIApplication sharedApplication] openURL:loginURL];
 }
 
+
+// Exposes the 'authenticate' method to React Native
+RCT_EXPORT_METHOD(playSong:(NSString *)uri)
+{
+    RCTLogInfo(@"Playing Song");
+    RCTLogInfo(@"%@", uri);
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player playSpotifyURI:uri startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to play: %@", error);
+            return;
+        }
+    }];
+
+}
+
+
 /*
  * The method that you need to call when the application is opened through a Custom URL Scheme
  * (Here it would be whenever the webview redirects to: 'my-super-application://callback')
@@ -146,14 +163,14 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
 
 - (void)audioStreamingDidLogin:(SPTAudioStreamingController *)audioStreaming
 {
-    RCTLogInfo(@"We Made it");
+    /*RCTLogInfo(@"We Made it");
     SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
     [spotifyModule.player playSpotifyURI:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp" startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
         if (error != nil) {
             NSLog(@"*** failed to play: %@", error);
             return;
         }
-    }];
+    }];*/
 }
 
 

@@ -34,7 +34,6 @@
 		23342DFF1E80AFEC006554F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342DFE1E80AFEC006554F0 /* AVFoundation.framework */; };
 		23342E011E80AFFA006554F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342E001E80AFFA006554F0 /* SystemConfiguration.framework */; };
 		23736BFE1EDF63B600997142 /* SpotifyModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 23736BFD1EDF63B600997142 /* SpotifyModule.m */; };
-		23736C251EDF771600997142 /* FjordLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 23736C231EDF771600997142 /* FjordLogo.png */; };
 		23736C261EDF771600997142 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23736C241EDF771600997142 /* Launch Screen.storyboard */; };
 		2386643A1ED9686B00764409 /* FjordLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 238664391ED9686B00764409 /* FjordLogo.png */; };
 		2386643E1EDBEF4F00764409 /* CustomTransitions.js in Resources */ = {isa = PBXBuildFile; fileRef = 2386643D1EDBEF4F00764409 /* CustomTransitions.js */; };
@@ -302,7 +301,6 @@
 		23342E001E80AFFA006554F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		23736BFC1EDF63B600997142 /* SpotifyModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotifyModule.h; path = Fjord/SpotifyModule.h; sourceTree = "<group>"; };
 		23736BFD1EDF63B600997142 /* SpotifyModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotifyModule.m; path = Fjord/SpotifyModule.m; sourceTree = "<group>"; };
-		23736C231EDF771600997142 /* FjordLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FjordLogo.png; sourceTree = "<group>"; };
 		23736C241EDF771600997142 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		238664391ED9686B00764409 /* FjordLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FjordLogo.png; path = ../FjordLogo.png; sourceTree = "<group>"; };
 		2386643D1EDBEF4F00764409 /* CustomTransitions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = CustomTransitions.js; path = ../CustomTransitions.js; sourceTree = "<group>"; };
@@ -463,7 +461,6 @@
 		13B07FAE1A68108700A75B9A /* Fjord */ = {
 			isa = PBXGroup;
 			children = (
-				23736C231EDF771600997142 /* FjordLogo.png */,
 				23736C241EDF771600997142 /* Launch Screen.storyboard */,
 				23736BFC1EDF63B600997142 /* SpotifyModule.h */,
 				23736BFD1EDF63B600997142 /* SpotifyModule.m */,
@@ -693,6 +690,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 324ZZ78NT4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -995,7 +997,6 @@
 				23E208501E825FB200792178 /* Octicons.ttf in Resources */,
 				23E208521E825FB200792178 /* SimpleLineIcons.ttf in Resources */,
 				23342DDD1E80AD5B006554F0 /* Song.js in Resources */,
-				23736C251EDF771600997142 /* FjordLogo.png in Resources */,
 				23342DDB1E80AD5B006554F0 /* Search.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

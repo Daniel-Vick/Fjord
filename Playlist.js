@@ -1,5 +1,5 @@
 import React, { Component, } from 'react'
-import { View, Button, ListView, Text, TouchableHighlight, AsyncStorage } from 'react-native'
+import { View, Button, ListView, Text, TouchableHighlight, AsyncStorage} from 'react-native'
 import Song from './Song.js'
 import MenuBar from './MenuBar.js'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,6 +30,8 @@ class Playlist extends Component {
   }
   componentDidMount() {
     AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
+    //console.log("AUTH######");
+      //                                      console.log(authStr);
                                           this.getSongs(authStr);
                                           });
   }
@@ -38,11 +40,16 @@ class Playlist extends Component {
     var new_url = "https://api.spotify.com/v1/users/"+this.props.username+"/playlists/" + this.props.id;
     return fetch(new_url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + auth_key}})
       .then((response) => response.json()).then((responseJson) => {
+        //console.log("Response");
+        //console.log(responseJson);
+        
         var items = responseJson.tracks.items;
+        //console.log(items);
         var songNames = [];
         for (i = 0; i < items.length; i++) {
-          songNames.push([items[i].track.name, items[i].track.artists[0].name]);
+          songNames.push([items[i].track.name, items[i].track.artists[0].name, items[i].track.uri]);
         }
+        console.log(songNames);
         that.setState({songs:that.state.dataSource.cloneWithRows(songNames)});
       })
       .catch((error) => {
@@ -52,20 +59,22 @@ class Playlist extends Component {
   
   render() {
     return(
-      <View style={{flex: 1, backgroundColor: this.props.BG}}>
-        <View style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop: 5}}>
-          <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginLeft:5}}>
+      <View style={{flex: 10, backgroundColor: this.props.BG}}>
+
+      
+        <View style={{flexDirection: 'row', flex: 1, backgroundColor: "#7DC1B6"}}>
+          <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 1, marginTop:25, marginLeft:5}}>
             <Icon name={"chevron-left"} color={"white"} size={20} />
           </TouchableHighlight>
-          <View style={{backgroundColor:this.props.BG, flex:8, alignItems:'center', marginTop:10, marginRight:20}}>
-            <Text style={{color:"white", fontWeight:'bold', fontSize:20, marginTop:5}}>{this.props.title}</Text>
+          <View style={{flex:8, alignItems:'center', marginTop:25, marginRight:25}}>
+            <Text style={{color:"white", fontSize:20}}>{this.props.title}</Text>
           </View>
-          <TouchableHighlight onPress={() => this.addPlaylist()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginRight:5}}>
+          <TouchableHighlight onPress={() => this.addPlaylist()} style={{flexDirection: 'row', flex: 1, marginTop:25, marginRight:5}}>
             <Icon name={"check"} color={"white"} size={20} />
           </TouchableHighlight>
         </View>
-        <View style={{flex: 8, backgroundColor: this.props.BG}}>
-          <ListView dataSource={this.state.songs} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]}/>}/>
+        <View style={{flex: 9, backgroundColor: this.props.BG}}>
+          <ListView dataSource={this.state.songs} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]} uri={rowData[2]}/>}/>
         </View>
       </View>
     );

@@ -13,21 +13,8 @@ class Search extends Component {
   
   componentDidMount() {
     AsyncStorage.getItem('AUTH_KEY').then((authStr)=>{
-                                          this.setState({AUTH: (JSON.parse(authStr).auth_key)});
+                                          this.setState({AUTH: authStr});
                                           });
-  }
-  
-  _navigate() {
-    this.props.navigator.pop();
-  }
-  test() {
-    var new_url = "";
-    return fetch('http://192.241.219.250:8888/Insert', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify({"public":false})})
-    .then((response) => console.log(response))
-                            
-    .catch((error) => {
-           console.error(error);
-           });
   }
   search() {
     var that = this;
@@ -37,7 +24,7 @@ class Search extends Component {
     console.log(new_url);
     console.log("###################################");
     console.log("###################################");
-    return fetch(new_url, {headers: {'Accept' : 'application/json'}})
+    return fetch(new_url, {headers: {'Accept' : 'application/json', 'Authorization' : 'Bearer ' + this.state.AUTH}})
       .then((response) => response.json()).then((responseJson) => {
                                                 console.log(JSON.stringify(responseJson));
         var items = responseJson.playlists.items;
@@ -51,26 +38,25 @@ class Search extends Component {
         console.error(error);
       });
   }
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: this.props.BG}}>
-        <TouchableHighlight onPress={() => this._navigate()} style={{flexDirection: 'row', flex: 1, backgroundColor: this.props.BG, marginTop:20, marginLeft:5}}>
-          <Icon
-            name={"chevron-left"}
-            color={"white"}
-            size={20}
-          />
-        </TouchableHighlight>
-            <TextInput style={{flex: 1, backgroundColor: this.props.BG, color: 'white', marginLeft:10}} placeholder="Type here!" onChangeText={(text) => this.setState({search: text})}/>
-        <Button
-            style={{flex:1, marginTop:10}}
-            onPress={() => this.test()}
-            title="Search"
-            color="#FFFFFF"
-          />
-        <View style={{flex: 15, backgroundColor: this.props.BG}}>
+  /*
+  <View style={{flex: 7, backgroundColor: this.props.BG}}>
           <ListView dataSource={this.state.results} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]}/>}/>
         </View>
+  
+  */
+  render() {
+    return (
+      <View style={{flex: 10, backgroundColor: this.props.BG}}>
+        <View style={{flex: 1, backgroundColor: "#7DC1B6", flexDirection: 'row'}}>
+            <View style={{marginTop:25, flex: 8, alignItems:'center'}}>
+            <Text style={{color:'white', fontSize: 18}}>Explore</Text>
+            </View>
+        </View>
+        <TextInput style={{flex: 1, backgroundColor: this.props.BG, color: 'white', marginLeft:10}} placeholder="Type here!" onSubmitEditing={() => this.search()} onChangeText={(text) => this.setState({search: text})}/>
+        <View style={{flex: 9, backgroundColor: this.props.BG}}>
+          <ListView dataSource={this.state.results} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]}/>}/>
+        </View>
+        
       </View>
     )
   }

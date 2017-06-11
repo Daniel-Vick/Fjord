@@ -1,16 +1,29 @@
 import React, { Component, } from 'react'
-import { View, Text} from 'react-native'
+import { View, Text, TouchableHighlight, NativeModules, StyleSheet } from 'react-native'
+const SpotifyModule = NativeModules.SpotifyModule;
+
+var styles = StyleSheet.create({
+                               title: {flex:2, color:"white", fontWeight:'bold', fontSize:18, marginTop:5},
+                               user:  {flex:1, color:"white", fontSize:15, marginBottom:5}
+                               
+});
 
 class Song extends Component {
  constructor(props) {
     super(props);
   }
+  playSong() {
+    console.log("Playing: " + this.props.uri);
+    SpotifyModule.playSong(this.props.uri);
+  }
   render() {
     return(
-      <View style={{borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
-        <Text style={{flex:2, color:"white", fontWeight:'bold', fontSize:15}}>{this.props.name}</Text>
-        <Text style={{flex:1, color:"#BBBBBB", fontSize:12}}>{this.props.artist}</Text>
-      </View>
+      <TouchableHighlight onPress={() => this.playSong()}>
+        <View style={{borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
+          <Text style={styles.title}>{this.props.name}</Text>
+          <Text style={styles.user}>{this.props.artist}</Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 }

@@ -46,7 +46,12 @@ export default class Fjord extends Component {
   onButtonPress() {
   var that = this;
     SpotifyModule.authenticate(data => {
+      console.log("#################");
       console.log(data.accessToken);
+      const AUTH_KEY = 'AUTH_KEY';
+
+      //const authObj = {auth_key: auth}
+      AsyncStorage.setItem(AUTH_KEY, data.accessToken);
       that.setState({loggedIn: true, auth: data.accessToken});
     });
     
@@ -60,7 +65,7 @@ export default class Fjord extends Component {
      return <Playlist BG={BGColor} auth={auth} navigator={navigator} id={route.id} username={route.username} title={route.title} url={route.url}/>
    }
    if(route.name == 'Leaderboard') {
-     return <Leaderboard BG={BGColor} firebaseApp={firebaseApp} auth={auth} navigator={navigator} />
+     return <Leaderboard BG={BGColor} firebaseApp={firebaseApp} auth={this.state.auth} navigator={navigator} />
    }
     if(route.name == 'Search') {
      return <Search BG={BGColor} auth={auth} navigator={navigator} />
