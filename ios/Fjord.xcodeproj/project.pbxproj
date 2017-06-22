@@ -21,22 +21,32 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		233007E51E960653004A397B /* Login.js in Resources */ = {isa = PBXBuildFile; fileRef = 233007E41E960653004A397B /* Login.js */; };
-		23342DD51E80AD5B006554F0 /* Account.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DCC1E80AD5A006554F0 /* Account.js */; };
-		23342DD61E80AD5B006554F0 /* AccountPlaylist.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DCD1E80AD5A006554F0 /* AccountPlaylist.js */; };
+		230295781EF8DDCA00971779 /* Account.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302956B1EF8DDCA00971779 /* Account.js */; };
+		230295791EF8DDCA00971779 /* AccountPlaylist.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302956C1EF8DDCA00971779 /* AccountPlaylist.js */; };
+		2302957A1EF8DDCA00971779 /* CustomTransitions.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302956D1EF8DDCA00971779 /* CustomTransitions.js */; };
+		2302957B1EF8DDCA00971779 /* Leaderboard.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302956E1EF8DDCA00971779 /* Leaderboard.js */; };
+		2302957C1EF8DDCA00971779 /* Login.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302956F1EF8DDCA00971779 /* Login.js */; };
+		2302957D1EF8DDCA00971779 /* MenuBar.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295701EF8DDCA00971779 /* MenuBar.js */; };
+		2302957E1EF8DDCA00971779 /* Playlist.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295711EF8DDCA00971779 /* Playlist.js */; };
+		2302957F1EF8DDCA00971779 /* PlaylistView.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295721EF8DDCA00971779 /* PlaylistView.js */; };
+		230295801EF8DDCA00971779 /* Search.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295731EF8DDCA00971779 /* Search.js */; };
+		230295811EF8DDCA00971779 /* SearchBar.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295741EF8DDCA00971779 /* SearchBar.js */; };
+		230295821EF8DDCA00971779 /* Song.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295751EF8DDCA00971779 /* Song.js */; };
+		230295841EF8DF5E00971779 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295831EF8DF5E00971779 /* index.js */; };
+		230295881EF8E08A00971779 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295851EF8E08A00971779 /* index.js */; };
+		2302958C1EF8E1D300971779 /* authFlow.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302958B1EF8E1D300971779 /* authFlow.js */; };
+		2302958E1EF8E37700971779 /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302958D1EF8E37700971779 /* App.js */; };
+		230295901EF8E63200971779 /* reduxApp.js in Resources */ = {isa = PBXBuildFile; fileRef = 2302958F1EF8E63200971779 /* reduxApp.js */; };
+		230295921EF8F5BB00971779 /* auth.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295911EF8F5BB00971779 /* auth.js */; };
+		230295941EFA363300971779 /* SearchContainer.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295931EFA363300971779 /* SearchContainer.js */; };
+		230295961EFA36E400971779 /* location.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295951EFA36E400971779 /* location.js */; };
+		230295981EFA377600971779 /* locationFlow.js in Resources */ = {isa = PBXBuildFile; fileRef = 230295971EFA377600971779 /* locationFlow.js */; };
 		23342DD71E80AD5B006554F0 /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DCE1E80AD5A006554F0 /* index.ios.js */; };
-		23342DD81E80AD5B006554F0 /* Leaderboard.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DCF1E80AD5A006554F0 /* Leaderboard.js */; };
-		23342DD91E80AD5B006554F0 /* MenuBar.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD01E80AD5A006554F0 /* MenuBar.js */; };
-		23342DDA1E80AD5B006554F0 /* PlaylistView.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD11E80AD5A006554F0 /* PlaylistView.js */; };
-		23342DDB1E80AD5B006554F0 /* Search.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD21E80AD5A006554F0 /* Search.js */; };
-		23342DDC1E80AD5B006554F0 /* Playlist.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD31E80AD5A006554F0 /* Playlist.js */; };
-		23342DDD1E80AD5B006554F0 /* Song.js in Resources */ = {isa = PBXBuildFile; fileRef = 23342DD41E80AD5B006554F0 /* Song.js */; };
 		23342DFF1E80AFEC006554F0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342DFE1E80AFEC006554F0 /* AVFoundation.framework */; };
 		23342E011E80AFFA006554F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23342E001E80AFFA006554F0 /* SystemConfiguration.framework */; };
 		23736BFE1EDF63B600997142 /* SpotifyModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 23736BFD1EDF63B600997142 /* SpotifyModule.m */; };
 		23736C261EDF771600997142 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23736C241EDF771600997142 /* Launch Screen.storyboard */; };
 		2386643A1ED9686B00764409 /* FjordLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 238664391ED9686B00764409 /* FjordLogo.png */; };
-		2386643E1EDBEF4F00764409 /* CustomTransitions.js in Resources */ = {isa = PBXBuildFile; fileRef = 2386643D1EDBEF4F00764409 /* CustomTransitions.js */; };
 		23E208421E825FB200792178 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208381E825FB200792178 /* Entypo.ttf */; };
 		23E208431E825FB200792178 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208381E825FB200792178 /* Entypo.ttf */; };
 		23E208441E825FB200792178 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23E208391E825FB200792178 /* EvilIcons.ttf */; };
@@ -72,6 +82,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* FjordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FjordTests.m */; };
+		34A1A0C0D5A846DBB26DD970 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAAC669843EC49AAAB5C898C /* libAirMaps.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -139,6 +150,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		239C48FE1EEE12BB00DAD6A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21FBE54A3E76402E9CB8FDB0 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -287,23 +305,34 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Fjord/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Fjord/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		233007E41E960653004A397B /* Login.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Login.js; path = ../Login.js; sourceTree = "<group>"; };
-		23342DCC1E80AD5A006554F0 /* Account.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Account.js; path = ../Account.js; sourceTree = "<group>"; };
-		23342DCD1E80AD5A006554F0 /* AccountPlaylist.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = AccountPlaylist.js; path = ../AccountPlaylist.js; sourceTree = "<group>"; };
+		21FBE54A3E76402E9CB8FDB0 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
+		2302956B1EF8DDCA00971779 /* Account.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Account.js; sourceTree = "<group>"; };
+		2302956C1EF8DDCA00971779 /* AccountPlaylist.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AccountPlaylist.js; sourceTree = "<group>"; };
+		2302956D1EF8DDCA00971779 /* CustomTransitions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CustomTransitions.js; sourceTree = "<group>"; };
+		2302956E1EF8DDCA00971779 /* Leaderboard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Leaderboard.js; sourceTree = "<group>"; };
+		2302956F1EF8DDCA00971779 /* Login.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Login.js; sourceTree = "<group>"; };
+		230295701EF8DDCA00971779 /* MenuBar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MenuBar.js; sourceTree = "<group>"; };
+		230295711EF8DDCA00971779 /* Playlist.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Playlist.js; sourceTree = "<group>"; };
+		230295721EF8DDCA00971779 /* PlaylistView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PlaylistView.js; sourceTree = "<group>"; };
+		230295731EF8DDCA00971779 /* Search.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Search.js; sourceTree = "<group>"; };
+		230295741EF8DDCA00971779 /* SearchBar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SearchBar.js; sourceTree = "<group>"; };
+		230295751EF8DDCA00971779 /* Song.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Song.js; sourceTree = "<group>"; };
+		230295831EF8DF5E00971779 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		230295851EF8E08A00971779 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		2302958B1EF8E1D300971779 /* authFlow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = authFlow.js; sourceTree = "<group>"; };
+		2302958D1EF8E37700971779 /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = App.js; sourceTree = "<group>"; };
+		2302958F1EF8E63200971779 /* reduxApp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reduxApp.js; sourceTree = "<group>"; };
+		230295911EF8F5BB00971779 /* auth.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = auth.js; sourceTree = "<group>"; };
+		230295931EFA363300971779 /* SearchContainer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SearchContainer.js; sourceTree = "<group>"; };
+		230295951EFA36E400971779 /* location.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = location.js; sourceTree = "<group>"; };
+		230295971EFA377600971779 /* locationFlow.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = locationFlow.js; sourceTree = "<group>"; };
 		23342DCE1E80AD5A006554F0 /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = ../index.ios.js; sourceTree = "<group>"; };
-		23342DCF1E80AD5A006554F0 /* Leaderboard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Leaderboard.js; path = ../Leaderboard.js; sourceTree = "<group>"; };
-		23342DD01E80AD5A006554F0 /* MenuBar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = MenuBar.js; path = ../MenuBar.js; sourceTree = "<group>"; };
-		23342DD11E80AD5A006554F0 /* PlaylistView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = PlaylistView.js; path = ../PlaylistView.js; sourceTree = "<group>"; };
-		23342DD21E80AD5A006554F0 /* Search.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Search.js; path = ../Search.js; sourceTree = "<group>"; };
-		23342DD31E80AD5A006554F0 /* Playlist.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Playlist.js; path = ../Playlist.js; sourceTree = "<group>"; };
-		23342DD41E80AD5B006554F0 /* Song.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = Song.js; path = ../Song.js; sourceTree = "<group>"; };
 		23342DFE1E80AFEC006554F0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		23342E001E80AFFA006554F0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		23736BFC1EDF63B600997142 /* SpotifyModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotifyModule.h; path = Fjord/SpotifyModule.h; sourceTree = "<group>"; };
 		23736BFD1EDF63B600997142 /* SpotifyModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotifyModule.m; path = Fjord/SpotifyModule.m; sourceTree = "<group>"; };
 		23736C241EDF771600997142 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		238664391ED9686B00764409 /* FjordLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FjordLogo.png; path = ../FjordLogo.png; sourceTree = "<group>"; };
-		2386643D1EDBEF4F00764409 /* CustomTransitions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = CustomTransitions.js; path = ../CustomTransitions.js; sourceTree = "<group>"; };
 		23E208381E825FB200792178 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		23E208391E825FB200792178 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		23E2083A1E825FB200792178 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -322,6 +351,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		CAAC669843EC49AAAB5C898C /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +383,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				34A1A0C0D5A846DBB26DD970 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +521,58 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2302954F1EF8DDC000971779 /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				230295951EFA36E400971779 /* location.js */,
+				230295911EF8F5BB00971779 /* auth.js */,
+				230295831EF8DF5E00971779 /* index.js */,
+			);
+			name = actions;
+			path = ../actions;
+			sourceTree = "<group>";
+		};
+		2302956A1EF8DDCA00971779 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				2302958D1EF8E37700971779 /* App.js */,
+				2302956B1EF8DDCA00971779 /* Account.js */,
+				2302956C1EF8DDCA00971779 /* AccountPlaylist.js */,
+				2302956D1EF8DDCA00971779 /* CustomTransitions.js */,
+				2302956E1EF8DDCA00971779 /* Leaderboard.js */,
+				2302956F1EF8DDCA00971779 /* Login.js */,
+				230295701EF8DDCA00971779 /* MenuBar.js */,
+				230295711EF8DDCA00971779 /* Playlist.js */,
+				230295721EF8DDCA00971779 /* PlaylistView.js */,
+				230295731EF8DDCA00971779 /* Search.js */,
+				230295741EF8DDCA00971779 /* SearchBar.js */,
+				230295751EF8DDCA00971779 /* Song.js */,
+			);
+			name = components;
+			path = ../components;
+			sourceTree = "<group>";
+		};
+		230295761EF8DDCA00971779 /* containers */ = {
+			isa = PBXGroup;
+			children = (
+				230295931EFA363300971779 /* SearchContainer.js */,
+				2302958F1EF8E63200971779 /* reduxApp.js */,
+			);
+			name = containers;
+			path = ../containers;
+			sourceTree = "<group>";
+		};
+		230295771EF8DDCA00971779 /* reducers */ = {
+			isa = PBXGroup;
+			children = (
+				230295971EFA377600971779 /* locationFlow.js */,
+				230295851EF8E08A00971779 /* index.js */,
+				2302958B1EF8E1D300971779 /* authFlow.js */,
+			);
+			name = reducers;
+			path = ../reducers;
+			sourceTree = "<group>";
+		};
 		23342DFD1E80AF34006554F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +583,14 @@
 				23342DFE1E80AFEC006554F0 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		239C48FB1EEE12BB00DAD6A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				239C48FF1EEE12BB00DAD6A5 /* libAirMaps.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		23E208371E825FB200792178 /* Fonts */ = {
@@ -551,6 +642,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				21FBE54A3E76402E9CB8FDB0 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -573,17 +665,11 @@
 				00E356EF1AD99517003FC87E /* FjordTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				23342DFD1E80AF34006554F0 /* Frameworks */,
-				23342DCC1E80AD5A006554F0 /* Account.js */,
-				23342DCD1E80AD5A006554F0 /* AccountPlaylist.js */,
+				230295761EF8DDCA00971779 /* containers */,
+				230295771EF8DDCA00971779 /* reducers */,
+				2302954F1EF8DDC000971779 /* actions */,
+				2302956A1EF8DDCA00971779 /* components */,
 				23342DCE1E80AD5A006554F0 /* index.ios.js */,
-				233007E41E960653004A397B /* Login.js */,
-				23342DCF1E80AD5A006554F0 /* Leaderboard.js */,
-				23342DD01E80AD5A006554F0 /* MenuBar.js */,
-				23342DD11E80AD5A006554F0 /* PlaylistView.js */,
-				23342DD21E80AD5A006554F0 /* Search.js */,
-				23342DD31E80AD5A006554F0 /* Playlist.js */,
-				23342DD41E80AD5B006554F0 /* Song.js */,
-				2386643D1EDBEF4F00764409 /* CustomTransitions.js */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -681,7 +767,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -719,6 +805,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 239C48FB1EEE12BB00DAD6A5 /* Products */;
+					ProjectRef = 21FBE54A3E76402E9CB8FDB0 /* AirMaps.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -829,6 +919,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		239C48FF1EEE12BB00DAD6A5 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = 239C48FE1EEE12BB00DAD6A5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -974,30 +1071,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23342DD81E80AD5B006554F0 /* Leaderboard.js in Resources */,
+				230295881EF8E08A00971779 /* index.js in Resources */,
 				23E208461E825FB200792178 /* FontAwesome.ttf in Resources */,
 				23E208421E825FB200792178 /* Entypo.ttf in Resources */,
-				23342DD61E80AD5B006554F0 /* AccountPlaylist.js in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				2302957C1EF8DDCA00971779 /* Login.js in Resources */,
 				2386643A1ED9686B00764409 /* FjordLogo.png in Resources */,
-				233007E51E960653004A397B /* Login.js in Resources */,
-				2386643E1EDBEF4F00764409 /* CustomTransitions.js in Resources */,
+				2302957E1EF8DDCA00971779 /* Playlist.js in Resources */,
+				2302957A1EF8DDCA00971779 /* CustomTransitions.js in Resources */,
+				2302958C1EF8E1D300971779 /* authFlow.js in Resources */,
 				23E208481E825FB200792178 /* Foundation.ttf in Resources */,
-				23342DD51E80AD5B006554F0 /* Account.js in Resources */,
-				23342DD91E80AD5B006554F0 /* MenuBar.js in Resources */,
+				230295781EF8DDCA00971779 /* Account.js in Resources */,
+				230295901EF8E63200971779 /* reduxApp.js in Resources */,
 				23E208441E825FB200792178 /* EvilIcons.ttf in Resources */,
 				23E2084A1E825FB200792178 /* Ionicons.ttf in Resources */,
 				23736C261EDF771600997142 /* Launch Screen.storyboard in Resources */,
 				23342DD71E80AD5B006554F0 /* index.ios.js in Resources */,
-				23342DDA1E80AD5B006554F0 /* PlaylistView.js in Resources */,
+				230295821EF8DDCA00971779 /* Song.js in Resources */,
 				23E208541E825FB200792178 /* Zocial.ttf in Resources */,
+				230295961EFA36E400971779 /* location.js in Resources */,
+				2302957F1EF8DDCA00971779 /* PlaylistView.js in Resources */,
+				2302957B1EF8DDCA00971779 /* Leaderboard.js in Resources */,
+				230295811EF8DDCA00971779 /* SearchBar.js in Resources */,
+				230295791EF8DDCA00971779 /* AccountPlaylist.js in Resources */,
+				230295941EFA363300971779 /* SearchContainer.js in Resources */,
+				2302957D1EF8DDCA00971779 /* MenuBar.js in Resources */,
+				230295801EF8DDCA00971779 /* Search.js in Resources */,
 				23E2084C1E825FB200792178 /* MaterialCommunityIcons.ttf in Resources */,
 				23E2084E1E825FB200792178 /* MaterialIcons.ttf in Resources */,
-				23342DDC1E80AD5B006554F0 /* Playlist.js in Resources */,
+				2302958E1EF8E37700971779 /* App.js in Resources */,
 				23E208501E825FB200792178 /* Octicons.ttf in Resources */,
 				23E208521E825FB200792178 /* SimpleLineIcons.ttf in Resources */,
-				23342DDD1E80AD5B006554F0 /* Song.js in Resources */,
-				23342DDB1E80AD5B006554F0 /* Search.js in Resources */,
+				230295921EF8F5BB00971779 /* auth.js in Resources */,
+				230295841EF8DF5E00971779 /* index.js in Resources */,
+				230295981EFA377600971779 /* locationFlow.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1109,9 +1216,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = FjordTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1126,9 +1241,17 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = FjordTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1152,6 +1275,7 @@
 					and,
 					"$(SRCROOT)/../../react-native/React",
 					"and\n$(SRCROOT)/../../react-native/Libraries",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 				INFOPLIST_FILE = Fjord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1180,6 +1304,7 @@
 					and,
 					"$(SRCROOT)/../../react-native/React",
 					"and\n$(SRCROOT)/../../react-native/Libraries",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 				INFOPLIST_FILE = Fjord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1206,8 +1331,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = "Fjord-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1232,8 +1365,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+				);
 				INFOPLIST_FILE = "Fjord-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1259,6 +1400,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Fjord-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Fjord-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1280,6 +1425,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Fjord-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Fjord-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
