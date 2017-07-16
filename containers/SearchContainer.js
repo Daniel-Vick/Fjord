@@ -43,6 +43,7 @@ function mapStateToProps(state) {
     auth_key: state.authFlow.auth_key,
     logged_in: state.authFlow.logged_in,
     location: state.locationFlow.location,
+    leaderboard: state.locationFlow.leaderboard,
   };
 }
 

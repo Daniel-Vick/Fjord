@@ -32,26 +32,40 @@ class App extends Component {
     super(props);
     this.state = {username: '', playlist: '', auth:'', loggedIn: false, location: "currentLocation"}
   }
+  componentDidMount() {
+    AsyncStorage.multiGet(['AUTH_KEY', 'REFRESH_TOKEN', 'EXPIRATION_DATE'], (err, result) => {
+      console.log(result);
+      //SpotifyModule.login(result[0][1]);
+      //this.props.setAuth(result[0][1], result[2][1]);
+      //this.setState({loggedIn: true});
+    })
+  }
   onButtonPress() {
     var that = this;
     SpotifyModule.authenticate(data => {
+      if (data != null) {
       console.log("#################");
       console.log(data.accessToken);
+      console.log(data.expirationDate);
       const AUTH_KEY = 'AUTH_KEY';
-      that.props.setAuth(data.accessToken);
+      that.props.setAuth(data.accessToken, data.expirationDate);
+      //var sessionInfo = {accessToken: data.accessToken, refreshToken: data.refreshToken, expirationDate: data.expirationDate};
 
       //const authObj = {auth_key: auth}
-      AsyncStorage.setItem(AUTH_KEY, data.accessToken);
+      AsyncStorage.multiSet([[AUTH_KEY, data.accessToken], ['REFRESH_TOKEN', data.refreshToken], ['EXPIRATION_DATE', data.expirationDate]]);
       that.setState({loggedIn: true, auth: data.accessToken});
+      } else {
+        that.setState({loggedIn: true});
+      }
     });
     
   }
   renderScene(route, navigator) {
    if(route.name == 'Playlist') {
-     return <Playlist BG={BGColor} auth_key={this.props.auth_key} navigator={navigator} id={route.id} username={route.username} title={route.title} url={route.url}/>
+     return <Playlist BG={BGColor} fauth_key={this.props.auth_key} navigator={navigator} id={route.id} username={route.username} title={route.title} url={route.url}  setPlaying={this.props.setPlaying}/>
    }
    if(route.name == 'Leaderboard') {
-     return <Leaderboard test={this.props.auth_key} BG={BGColor} auth={this.state.auth} navigator={navigator} />
+     return <Leaderboard test={this.props.auth_key} leaderboard={this.props.leaderboard} setLeaderboard={this.props.setLeaderboard} location={this.props.location} BG={BGColor} auth={this.state.auth} navigator={navigator} />
    }
     if(route.name == 'Search') {
      return <SearchContainer BG={BGColor} auth={this.props.auth_key} navigator={navigator} />
@@ -72,17 +86,17 @@ class App extends Component {
     if (this.state.loggedIn) {
     return (
       <Navigator
-        navigationBar={<MenuBar />}
+        navigationBar={<MenuBar playing={this.props.playing} setPlaying={this.props.setPlaying}/>}
         configureScene={(route, routeStack) => CustomTransitions.NONE}
         initialRoute={{ name: 'Leaderboard'}}
         renderScene={ this.renderScene.bind(this) } />
     );
     } else {
       return(
-      <View style={{paddingTop:40}}>
-        <TouchableHighlight onPress={this.onButtonPress.bind(this)}>
-          <Text>Spotify Auth</Text>
-        </TouchableHighlight>
+      <View style={{flex:1, paddingTop:240, alignItems:'center', backgroundColor:BGColor}}>
+          <TouchableHighlight style={{backgroundColor: "#7DC1B6", paddingLeft:30, paddingRight:30, paddingTop:20,paddingBottom:20, borderRadius:5}} onPress={this.onButtonPress.bind(this)}>
+            <Text style={{color:'white'}}>Login with Spotify</Text>
+          </TouchableHighlight>
       </View>);
     }
   }

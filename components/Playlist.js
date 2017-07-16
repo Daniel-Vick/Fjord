@@ -1,8 +1,10 @@
 import React, { Component, } from 'react'
-import { View, Button, ListView, Text, TouchableHighlight, AsyncStorage} from 'react-native'
+import { View, Button, ListView, Text, TouchableHighlight, AsyncStorage, NativeModules} from 'react-native'
 import Song from './Song.js'
 import MenuBar from './MenuBar.js'
 import Icon from 'react-native-vector-icons/FontAwesome';
+const SpotifyModule = NativeModules.SpotifyModule;
+
 
 class Playlist extends Component {
   constructor(props) {
@@ -56,7 +58,12 @@ class Playlist extends Component {
         console.error(error);
       });
   }
-  
+  playPlaylist() {
+    console.log("Playing Playlist");
+    console.log(this.state.songs._dataBlob.s1);
+    SpotifyModule.playPlaylist(this.state.songs._dataBlob.s1);
+    this.props.setPlaying(true);
+  }
   render() {
     return(
       <View style={{flex: 10, backgroundColor: this.props.BG}}>
@@ -73,6 +80,12 @@ class Playlist extends Component {
             <Icon name={"check"} color={"white"} size={20} />
           </TouchableHighlight>
         </View>
+        <Button
+          onPress={this.playPlaylist.bind(this)}
+          title="Play"
+          color="white"
+          backgroundColor="#7DC1B6"
+        />
         <View style={{flex: 9, backgroundColor: this.props.BG}}>
           <ListView dataSource={this.state.songs} renderRow={(rowData) => <Song name={rowData[0]} artist={rowData[1]} uri={rowData[2]}/>}/>
         </View>

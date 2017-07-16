@@ -1,5 +1,6 @@
 const initialState = {
-  location: "currentLocation"
+  location: {name: "Current Location", position: {lat: 0, lng: 0}},
+  leaderboard: "Top",
 }
 
 export default function authFlow(state = initialState, action) {
@@ -15,6 +16,12 @@ export default function authFlow(state = initialState, action) {
           ...state,
           location: action.location,
           update: true,
+      }
+    case 'SET_LEADERBOARD':
+      console.log("SET_LEADERBOARD");
+      return {
+          ...state,
+          leaderboard: action.leaderboard,
       }
     default:
       console.log("DEFAULT");

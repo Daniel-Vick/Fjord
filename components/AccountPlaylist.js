@@ -1,15 +1,15 @@
 import React, { Component, } from 'react'
 import { View, Text, TouchableHighlight, Image} from 'react-native'
-import * as firebase from 'firebase';
+
 
 //           <TouchableHighlight onPress={() => this._add(this.props.user, this.props.id, this.props.name, this.props.score)} style={{flex:1, borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
 //192.241.219.250
-var ip = 'http://192.241.219.250';
+//var ip = 'http://192.241.219.250';
+var ip = 'http://10.1.10.171';
 
 class AccountPlaylist extends Component {
   constructor(props) {
     super(props);
-    this.itemsRef = this.props.firebaseApp.database().ref();
   }
   _add(input1, input2, input3, input4) {
     this.itemsRef.push({ username: input1, id: input2, name: input3, score: input4})
@@ -23,7 +23,7 @@ class AccountPlaylist extends Component {
                                    userId: this.props.user,
                                    artwork: this.props.artwork,
                                    geolocation: position };
-                      console.log(data);
+                      console.log(data.geolocation);
                       return fetch(ip+':8888/AddPlaylist', {method: 'PUT', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)})
                       .catch((error) => {
                         console.error(error);

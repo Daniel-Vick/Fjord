@@ -25,17 +25,16 @@ class SearchBar extends Component {
     
     AIzaSyCanpgLmdaH21GZEWSHwuLlIzBoy1ddBww
  */
- setLoc(loc) {
+ setLoc(name, details) {
   console.log("SearchProps");
   console.log(this.props);
-  this.props.setLoc(loc);
+  var fullLoc = {name: name, position: details.geometry.location}
+  this.props.setLoc(fullLoc);
  }
   render() {
+    var that = this;
     return(
       <View style={{flex:1, backgroundColor:this.props.BG}}>
-        <TouchableHighlight onPress={() => this.setLoc("TestLoc")}>
-          <Text>Test Button</Text>
-        </TouchableHighlight>
         <GooglePlacesAutocomplete
         placeholder='Search'
         minLength={2} // minimum length of text to search
@@ -46,8 +45,9 @@ class SearchBar extends Component {
         renderDescription={(row) => row.description} // custom description render
         onPress={(data, details = null) => {
           console.log("Test");// 'details' is provided when fetchDetails = true
-          console.log(data);
-          console.log(details);
+          console.log(data.structured_formatting);
+          console.log(details.geometry.location);
+          that.setLoc(data.structured_formatting.main_text, details);
         }}
         getDefaultValue={() => {
           return ''; // text input default value

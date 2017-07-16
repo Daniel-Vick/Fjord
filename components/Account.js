@@ -63,7 +63,7 @@ class Account extends Component {
             </View>
         </View>
         <View style={{flex: 9, backgroundColor: this.props.BG}}>
-            <ListView dataSource={this.state.playlists} renderRow={(rowData) => <AccountPlaylist firebaseApp={this.props.firebaseApp} id={rowData[0]} name={rowData[1]} user={rowData[2]} score={0} artwork={rowData[3]}/>}/>
+            <ListView dataSource={this.state.playlists} renderRow={(rowData) => <AccountPlaylist id={rowData[0]} name={rowData[1]} user={rowData[2]} score={0} artwork={rowData[3]}/>}/>
         </View>
       </View>
     )

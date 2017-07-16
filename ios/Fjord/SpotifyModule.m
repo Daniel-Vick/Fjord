@@ -44,7 +44,7 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
   [[SPTAuth defaultInstance] setRequestedScopes:@[SPTAuthUserReadPrivateScope, SPTAuthUserReadEmailScope, SPTAuthUserFollowReadScope, SPTAuthStreamingScope]];
 
   // OPTIONAL. Allows retrieval of refresheable tokens. If not specified, it uses the 'Implicit Grant' auth workflow
-  //[[SPTAuth defaultInstance] setTokenSwapURL: [NSURL URLWithString:@"http://localhost:8000/authenticator/spotify-token-swap"]];
+  [[SPTAuth defaultInstance] setTokenSwapURL: [NSURL URLWithString:@"http://10.1.10.171:8888/tokenSwap"]];
   
   /*
    * Creates and opens a Spotify Auth Webview
@@ -68,10 +68,11 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
   [spotifyModule.eventDispatcher setValue:self.bridge forKey:@"bridge"];
   
   RCTLogInfo(@"%@", loginURL);
-  NSString *authcode = @"BQBc04i9qGSIg7qalpLTEZRTKooHeox3U9Dz-pSrbQ7L1qMNr6eQQBUIBC95R6jqW0rW3QnnZDntn9LK1Zfg9nQGRYULE7CgWPeZidoP0R37z2YuVJ_UgBRy_rNhqPzbLF7T1ccbmr_1pZ_-K1Fk5EGc0cftLbuvSDipFlOCH3Kv_rby8DZmjuNH3LthwahAZJiz1ojg7L3WxpHfKhwBZWVyjkoKZl8sF1c2NTb2z3mUgLBYzZyAC1VUAtG9IjmjYofJ8AH-Bw";
+  NSString *authcode = @"BQBcsIeO1-BfOV6y-tmNVJSQYYT8LRA8q0wHK3ZJ3bDMFAdIlps8i2hO5FLgov_q-LGHf8wdm5G6rnW8PYdL1q8VNfQjXOaJl7PuA7PLGOdwu0aAgD1hWNdN_Dj8BQmNNbi1ceEDvxJhUACvE6XIF7vFpGtMFnEk9q3oJEwXun-q4HyPUUuAJ531Zsne_EBffaQm1aau4oAORAWyKjv7xvz7fjE7bZor0wL6byqdU2Md4V-7ypCriJlpJTIz7pbE2iNQ5aLkbA";
   RCTLogInfo(@"%@", authcode);
   spotifyModule.player.delegate = spotifyModule;
   //[spotifyModule.player loginWithAccessToken:authcode];
+  //spotifyModule.loginCallback(@[]);
   
   // Opening a URL in Safari close to application launch may trigger
   // an iOS bug, so we wait a bit before doing so.
@@ -79,7 +80,6 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
 }
 
 
-// Exposes the 'authenticate' method to React Native
 RCT_EXPORT_METHOD(playSong:(NSString *)uri)
 {
     RCTLogInfo(@"Playing Song");
@@ -91,6 +91,108 @@ RCT_EXPORT_METHOD(playSong:(NSString *)uri)
             return;
         }
     }];
+
+}
+
+RCT_EXPORT_METHOD(playPlaylist:(NSArray *)uris)
+{
+    RCTLogInfo(@"Playing Song");
+    RCTLogInfo(@"%@", uris[0]);
+  
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player playSpotifyURI:uris[0][2] startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to play: %@", error);
+            return;
+        }
+      }];
+    for (int i = 1; i < [uris count]; i++) {
+      [NSThread sleepForTimeInterval:.5];
+      [spotifyModule.player queueSpotifyURI:uris[i][2] callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to play: %@", error);
+            return;
+        }
+      }];
+    }
+
+}
+
+RCT_EXPORT_METHOD(play)
+{
+    RCTLogInfo(@"Play");
+  
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player setIsPlaying:YES callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to resume play: %@", error);
+            return;
+        }
+      }];
+}
+
+RCT_EXPORT_METHOD(pause)
+{
+    RCTLogInfo(@"Pause");
+  
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player setIsPlaying:NO callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to resume pause: %@", error);
+            return;
+        }
+      }];
+}
+
+RCT_EXPORT_METHOD(skipForward)
+{
+    RCTLogInfo(@"SkipForward");
+  
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player skipNext:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to resume pause: %@", error);
+            return;
+        }
+      }];
+}
+
+RCT_EXPORT_METHOD(skipBackward)
+{
+    RCTLogInfo(@"SkipBackward");
+  
+    SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+    [spotifyModule.player skipPrevious:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to resume pause: %@", error);
+            return;
+        }
+      }];
+}
+
+RCT_EXPORT_METHOD(login:(NSString *)token)
+{
+    RCTLogInfo(@"Logging In");
+    RCTLogInfo(@"%@", token);
+
+  
+  
+  
+  //save the login callback
+  SpotifyModule *spotifyModule = (SpotifyModule *)[SpotifyModule sharedManager];
+  spotifyModule.player = [SPTAudioStreamingController sharedInstance];
+  
+  NSError *audioStreamingInitError;
+  NSAssert([spotifyModule.player startWithClientId:@"d2419f567d224eacbafe2bae5e73e046" error:&audioStreamingInitError],
+             @"There was a problem starting the Spotify SDK: %@", audioStreamingInitError.description);
+  //setup event dispatcher
+  spotifyModule.eventDispatcher = [[RCTEventDispatcher alloc] init];
+  [spotifyModule.eventDispatcher setValue:self.bridge forKey:@"bridge"];
+
+  spotifyModule.player.delegate = spotifyModule;
+
+  [spotifyModule.player loginWithAccessToken:token];
+  
 
 }
 

@@ -19,7 +19,7 @@ class Song extends Component {
   render() {
     return(
       <TouchableHighlight onPress={() => this.playSong()}>
-        <View style={{borderBottomWidth:0.5, marginLeft:10, marginRight:10, borderColor:"white"}}>
+        <View style={{borderBottomWidth:0.5, marginTop:2, paddingBottom:2, marginLeft:10, marginRight:10, borderColor:"white"}}>
           <Text style={styles.title}>{this.props.name}</Text>
           <Text style={styles.user}>{this.props.artist}</Text>
         </View>

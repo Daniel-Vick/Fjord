@@ -10,7 +10,8 @@ var styles = StyleSheet.create({
                                
                                });
 
-var ip = 'http://192.241.219.250';
+//var ip = 'http://192.241.219.250';
+var ip= 'http://10.1.10.171';
 
 class PlaylistView extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class PlaylistView extends Component {
     return(
            <View style={{flex: 1, flexDirection: 'row', marginLeft:10, marginRight:10}} >
 
-           <TouchableHighlight onPress={() => this._navigate(this.props.user, this.props.id, this.props.name)} style={{flex: 9, borderBottomWidth:0.5, borderColor:"white"}}>
+           <TouchableHighlight onPress={() => this._navigate(this.props.user, this.props.id, this.props.name)} style={{flex: 9, borderBottomWidth:0.4, borderColor:"white"}}>
            <View style={{flex:1, flexDirection: 'row', marginTop: 5, marginBottom: 5, alignItems:'center'}}>
            <Image style={{width: 50, height: 50}} source={{uri: this.props.artwork}}/>
              <View style={{marginLeft: 10}}>
@@ -97,7 +98,7 @@ class PlaylistView extends Component {
            </View>
            </TouchableHighlight>
 
-           <View style={{flex:1, paddingTop:10, paddingBottom:10, borderBottomWidth:0.5, borderColor:"white"}}>
+           <View style={{flex:1, paddingTop:10, paddingBottom:10, borderBottomWidth:0.4, borderColor:"white"}}>
            <TouchableHighlight onPress={() => this._upVote(this.props.user, this.props.id, this.props.name, this.props.score, this.props._key)} style={{justifyContent:'center', marginRight:10}}>
             <Icon name="chevron-up" size={25} color={this.state.upVoteColor[this.props.vote + 1]} />
             </TouchableHighlight>
@@ -107,7 +108,7 @@ class PlaylistView extends Component {
             </TouchableHighlight>
 
            </View>
-           <View style={{flex:1, borderBottomWidth:0.5, borderColor:"white", flexDirection:'row', alignItems:'center'}}>
+           <View style={{flex:1, borderBottomWidth:0.4, borderColor:"white", flexDirection:'row', alignItems:'center'}}>
             <Text style={{color:"white", fontSize:15, fontWeight:'bold'}}>{this.props.score}</Text>
            </View>
            

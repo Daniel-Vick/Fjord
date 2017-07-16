@@ -12,30 +12,10 @@ import { Text,
   Button } from 'react-native'
 import PlaylistView from './PlaylistView'
 import MenuBar from './MenuBar.js'
-import * as firebase from 'firebase';
+import { LeaderboardStyle } from './Styles'
 
-var ip = 'http://192.241.219.250';
-
-var styles = StyleSheet.create({
-    tabInactive: {
-       //flex:1, flexDirection: 'row', backgroundColor: "#313C4F", alignItems:'center', justifyContent:'center', borderWidth: 2, borderColor: "#7DC1B6"
-                               flex:1, flexDirection: 'row', backgroundColor: "#7DC1B6", alignItems:'center', justifyContent:'center', marginBottom: 10
-                               
-    },
-    tabActive: {
-                               flex:1, flexDirection: 'row', backgroundColor:"#7DC1B6", alignItems:'center', justifyContent:'center', borderBottomWidth: 2, borderColor: 'white', paddingBottom:7
-    },
-    tabFontActive: {
-      color: 'white', fontSize: 23
-    },
-    tabFontInactive: {
-      color: 'white', fontSize: 20
-    }
-
-});
-
-const textColor = "#7DC1B6";
-
+//var ip = 'http://192.241.219.250';
+var ip = 'http://10.1.10.171';
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -55,17 +35,18 @@ class Leaderboard extends Component {
     dbArrayNew: null,
     lead: "Top",
     activeTab: 0,
-    tabStyles: [styles.tabActive, styles.tabFontActive,  styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive]
+    tabStyles: [LeaderboardStyle.tabActive, LeaderboardStyle.tabFontActive,  LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive, LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive]
   };
   }
   switchDataSource(source) {
+    this.props.setLeaderboard(source);
     if (source == "Top") {
-      this.setState({activeTab: 0, tabStyles: [styles.tabActive, styles.tabFontActive, styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive],lead: "Top"});
+      this.setState({activeTab: 0, tabStyles: [LeaderboardStyle.tabActive, LeaderboardStyle.tabFontActive, LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive, LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive],lead: "Top"});
       
     } else if (source == "New") {
-      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabFontInactive, styles.tabActive, styles.tabFontActive, styles.tabInactive, styles.tabFontInactive],lead: "New"});
+      this.setState({activeTab: 0, tabStyles: [LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive, LeaderboardStyle.tabActive, LeaderboardStyle.tabFontActive, LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive],lead: "New"});
     } else {
-      this.setState({activeTab: 0, tabStyles: [styles.tabInactive, styles.tabFontInactive, styles.tabInactive, styles.tabFontInactive, styles.tabActive, styles.tabFontActive],lead: "New"});
+      this.setState({activeTab: 0, tabStyles: [LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive, LeaderboardStyle.tabInactive, LeaderboardStyle.tabFontInactive, LeaderboardStyle.tabActive, LeaderboardStyle.tabFontActive],lead: "New"});
     }
   }
   addToLeaderBoard(res) {
@@ -104,14 +85,27 @@ class Leaderboard extends Component {
                   dbArrayNew: itemsNew,
                   dataSourceNew: this.state.dataSourceNew.cloneWithRows(itemsNew)
                   });
+    this.setState({refreshing: false});
   }
   listenFjord() {
+    var that;
     var data = { playlistName: this.props.name, playlistId: this.props.id, userId: this.props.user };
-    return fetch(ip+':8888/Top', {method: 'GET', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}})
-    .then((response) => response.json()).then((responseJSON) => this.addToLeaderBoard(responseJSON))
-    .catch((error) => {
-           console.error(error);
-           });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+                      console.log("Cur pos");
+                      console.log(position);
+                      var data = {'position': this.props.location};
+                      return fetch(ip+':8888/Top', {method: 'POST', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then((response) => response.json()).then((responseJSON) => this.addToLeaderBoard(responseJSON))
+                          .catch((error) => {
+                            console.error(error);
+                          });
+                      },
+      (error) => alert(JSON.stringify(error)),
+          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    
+    
+    
   }
   updateLead(key, val, vote) {
     var updatedNew = this.state.dbArrayNew.slice();
@@ -169,41 +163,38 @@ class Leaderboard extends Component {
     })
   }
   _onRefresh() {
+    var that = this;
     this.setState({refreshing: true});
-    this.listenFjord().then(() => {
-                     this.setState({refreshing: false});
-                     });
+    this.listenFjord();
   }
   componentDidMount() {
     this.listenFjord();
   }
-  switchTab(input) {
+  switchTab(input, loc) {
+    console.log("Dis da remix");
+    console.log(loc);
+    
     if (input == "Top") {
       return (<ListView refreshControl={
               <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh.bind(this)}
               />
-              } dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote} artwork={rowData.artwork}/>}/>);
+              } dataSource={this.state.dataSourceTop} renderRow={(rowData) => <PlaylistView navigator={this.props.navigator} id={rowData.id} name={rowData.name} user={rowData.username} score={rowData.score} _key={rowData._key} updateLead={this.updateLead} vote={rowData.vote} artwork={rowData.artwork}/>}/>);
     } else if (input == "New") {
       return (<ListView refreshControl={
               <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh.bind(this)}
               />
-              } dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView db={this.props.firebaseApp} navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote} artwork={rowData1.artwork}/>}/>);
+              } dataSource={this.state.dataSourceNew} renderRow={(rowData1) => <PlaylistView navigator={this.props.navigator} id={rowData1.id} name={rowData1.name} user={rowData1.username} score={rowData1.score} _key={rowData1._key} updateLead={this.updateLead} vote={rowData1.vote} artwork={rowData1.artwork}/>}/>);
     }
   }
   test
   render() {
-    if(this.props.location != "currentLocation") {
-      console.log(this.props.location);
-      console.log("Change");
-    }
-  
     return(
-      <View style={{flex: 10, backgroundColor:this.props.BG}}>
-        <View style={{flex:1, backgroundColor: "#7DC1B6", flexDirection: 'row', alignItems:'flex-end', justifyContent:'flex-end'}}>
+      <View style={LeaderboardStyle.topView}>
+        <View style={LeaderboardStyle.navView}>
            
            <TouchableHighlight style={this.state.tabStyles[2]} onPress={() => this.switchDataSource("New")}>
            <Text style={this.state.tabStyles[3]}>New</Text>
@@ -215,8 +206,8 @@ class Leaderboard extends Component {
            <Text style={this.state.tabStyles[5]}>Friends</Text>
            </TouchableHighlight>
         </View>
-        <View style={{flex: 9, backgroundColor: this.props.BG}}>
-           {this.switchTab(this.state.lead)}
+        <View style={LeaderboardStyle.listView}>
+           {this.switchTab(this.props.leaderboard, this.props.location)}
         </View>
       </View>
     );

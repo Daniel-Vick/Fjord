@@ -1,6 +1,7 @@
 const initialState = {
   auth_key: "Fuck",
-  logged_in: "SHit"
+  logged_in: "SHit",
+  expiration_date: "Now"
 }
 
 export default function authFlow(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function authFlow(state = initialState, action) {
       return {
           ...state,
           auth_key: action.auth_key,
-          logged_in: true
+          logged_in: true,
+          expiration_date: action.expiration_date,
       }
       
     default:
